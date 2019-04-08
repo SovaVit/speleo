@@ -1,0 +1,15 @@
+{
+  "name": "concurrently",
+  "version": "1.0.0",
+  "description": "concurrently",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd api && nodemon bin/www\" \"cd client && npm start\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
