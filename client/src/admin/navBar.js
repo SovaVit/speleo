@@ -55,7 +55,7 @@ import {
                   Фотогалерея
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Печери</DropdownItem>
+                  <DropdownItem href="">Печери</DropdownItem>
                   <DropdownItem href="">Експедиції</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

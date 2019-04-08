@@ -5,6 +5,7 @@ export const expeditionService = {
     getAll,
     getOne, 
     create,
+    update,
     deleteExpedition
   };
   async function getAll() {
@@ -33,6 +34,18 @@ export const expeditionService = {
       body: JSON.stringify(expedition)
     };
     const response = await fetch(`/speleo/expedition`, requestOptions);
+    const items = await handleResponse(response);
+  
+    return items;
+  }
+  async function update(id, expedition, token) {
+    
+    const requestOptions = {
+      method: "PATCH",
+      headers: authHeader(token),
+      body: JSON.stringify(expedition)
+    };
+    const response = await fetch(`/speleo/expedition/${id}`, requestOptions);
     const items = await handleResponse(response);
   
     return items;

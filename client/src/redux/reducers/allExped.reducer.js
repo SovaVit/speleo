@@ -32,6 +32,13 @@ export function allExpedition(state = initialState, action) {
         items: [...state.items, action.item],
         error: null
       }
+      case allExpeditionConstants.UPDATE_EXPEDITIONS_SUCCESS:
+      const State = state.items.filter(item => {return item._id !== action.item._id});
+      return {
+        isFetching: false,
+        items: [...State, action.item],
+        error: null
+      }
     case allExpeditionConstants.ALL_EXPEDITIONS_FAILURE:
       return {
         isFetching: false,
