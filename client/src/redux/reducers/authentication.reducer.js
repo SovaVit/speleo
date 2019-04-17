@@ -7,7 +7,7 @@ export function authentication(state = initialState, action) {
     case userConstants.LOGIN_REQUEST:
       return {
         isLogged: false,
-        token: action.user.token, 
+        token: "", 
         error: null
       };
     case userConstants.LOGIN_SUCCESS:
@@ -19,6 +19,7 @@ export function authentication(state = initialState, action) {
     case userConstants.LOGIN_FAILURE:
       return {
         isLogged: false,
+        token: "",
         status: action.error.status,
         error: action.error.statusText
         

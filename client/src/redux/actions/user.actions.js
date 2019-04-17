@@ -1,6 +1,4 @@
-
 import { userService } from "../../utilities/api/user.service";
-
 
 export const userConstants = {
   LOGIN_REQUEST: "USERS_LOGIN_REQUEST",
@@ -17,22 +15,20 @@ export const userActions = {
 
 function login(username, password) {
   return dispatch => {
-    dispatch(request({ username }));
+    dispatch(request());
 
-    userService.login(username, password).then(
+    return userService.login(username, password).then(
       user => {
         dispatch(success(user));
-        
       },
       error => {
         dispatch(failure(error));
-
       }
     );
   };
 
-  function request(user) {
-    return { type: userConstants.LOGIN_REQUEST, user };
+  function request() {
+    return { type: userConstants.LOGIN_REQUEST };
   }
   function success(user) {
     return { type: userConstants.LOGIN_SUCCESS, user };
@@ -43,9 +39,8 @@ function login(username, password) {
 }
 
 function logout(token) {
-
- userService.logout(token);
-  return (dispatch) => 
-  { 
-    dispatch({ type: userConstants.LOGOUT })};
+  userService.logout(token);
+  return dispatch => {
+    dispatch({ type: userConstants.LOGOUT });
+  };
 }

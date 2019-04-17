@@ -13,7 +13,7 @@ export function getAllExpeditions() {
   return dispatch => {
     dispatch(request());
 
-    expeditionService.getAll().then(
+    return expeditionService.getAll().then(
       items => {
         dispatch(allSuccess(items.expedition));
       },
@@ -26,7 +26,7 @@ export function getAllExpeditions() {
 export function deleteExpedition(id) {
   return (dispatch, getState) => {
     const token = getState().user.token;
-    expeditionService.deleteExpedition(id, token).then(
+    return expeditionService.deleteExpedition(id, token).then(
       item => {
         dispatch(deleteSuccess(item.expedition));
       },
@@ -39,7 +39,7 @@ export function deleteExpedition(id) {
 export function setExpedition(expedition) {
   return (dispatch, getState) => {
     const token = getState().user.token;
-    expeditionService.create(expedition, token).then(
+    return expeditionService.create(expedition, token).then(
       item => {
         dispatch(createSuccess(item.expedition));
       },
@@ -52,7 +52,7 @@ export function setExpedition(expedition) {
 export function updateExpedition(id, expedition) {
   return (dispatch, getState) => {
     const token = getState().user.token;
-    expeditionService.update(id, expedition, token).then(
+    return expeditionService.update(id, expedition, token).then(
       item => {
         dispatch(updateSuccess(item.expedition));
       },

@@ -3,7 +3,7 @@ import { allExpeditionConstants } from "../actions/allExped.actions";
 
 
 
-const initialState = { isFetching: false, items: [], error: null };
+export const initialState = { isFetching: false, items: [], error: null };
 
 export function allExpedition(state = initialState, action) {
   switch (action.type) {

@@ -16,7 +16,7 @@ const mapStateToProps = (store, ownProps) => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    update: _id => dispatch(updateExpedition(_id))
+    update: (_id, expedition) => dispatch(updateExpedition(_id, expedition))
   };
 };
 export default connect(
