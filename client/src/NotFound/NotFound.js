@@ -1,19 +1,19 @@
 import React from "react";
 import { withRouter } from "react-router";
-import css from "./NotFound.module.css";
+import { Alert } from "reactstrap";
 import NavBar from "../NavBar/Nav";
 
 const NotFound = ({ location }) => (
-  <div className={css.styles}>
+  <div>
     <NavBar />
-    <h1>Error 404</h1>
-    <div>
+    <h1 className="text-muted">Error 404</h1>
+    <Alert color="danger">
       Sorry, page{" "}
-      <p>
+      <p className="text-muted">
         <strong>{location.pathname}</strong>
       </p>{" "}
       was not found!
-    </div>
+    </Alert>
   </div>
 );
 

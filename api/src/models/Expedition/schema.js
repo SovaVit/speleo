@@ -17,10 +17,6 @@ const schema = new Schema({
   caveName: {
     type: String,
     required: [true]
-  },
-  photoId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Photo"
   }
 });
 

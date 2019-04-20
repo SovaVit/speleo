@@ -1,25 +1,19 @@
 import { oneCaveConstants } from "../actions/oneCave.actions";
 
-const initialState = { isFetching: false, item: [] };
+const initialState = { isFetching: false, item: {}, error: null};
 
 export function oneCave(state = initialState, action) {
   switch (action.type) {
     case oneCaveConstants.ONE_CAVE_REQUEST:
-      return {
-        isFetching: true,
-        item: [],
-        error: null
-      };
+      return {...state, isFetching: true};
     case oneCaveConstants.ONE_CAVE_SUCCESS:
-      return {
-        isFetching: false,
-        item: action.item,
-        error: null
-      };
+      return { ...state, isFetching: false, item: action.item};
     case oneCaveConstants.ONE_CAVE_FAILURE:
       return {
-        isLogged: false,
-        error: action.error
+        ...state,
+        isFetching: false,
+        status: action.error.status,
+        error: action.error.statusText
       };
     default:
       return state;

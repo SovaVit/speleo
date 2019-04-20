@@ -5,12 +5,11 @@ export const oneCaveConstants = {
   ONE_CAVE_FAILURE: "ONE_CAVE_FAILURE"
 };
 
-export function getOneCave(id) {
+function getOneCave(id) {
   return dispatch => {
     dispatch(request());
 
-    caveService.getOne(id).then(
-      //change service
+    return caveService.getOne(id).then(
       item => {
         dispatch(success(item));
       },
@@ -19,14 +18,24 @@ export function getOneCave(id) {
       }
     );
   };
+}
+function request() {
+  return { type: oneCaveConstants.ONE_CAVE_REQUEST };
+}
+function success(item) {
+  return { type: oneCaveConstants.ONE_CAVE_SUCCESS, item };
+}
+function failure(error) {
+  return { type: oneCaveConstants.ONE_CAVE_FAILURE, error };
+}
 
-  function request() {
-    return { type: oneCaveConstants.ONE_CAVE_REQUEST };
-  }
-  function success(item) {
-    return { type: oneCaveConstants.ONE_CAVE_SUCCESS, item };
-  }
-  function failure(error) {
-    return { type: oneCaveConstants.ONE_CAVE_FAILURE, error };
-  }
+export function FetchIfNeeded(id) {
+  return (dispatch, getState) => {
+    const post = getState().caves.items.find(item => item._id === id);
+
+    if (post) {
+      return dispatch(success(post));
+    }
+    return dispatch(getOneCave(id));
+  };
 }

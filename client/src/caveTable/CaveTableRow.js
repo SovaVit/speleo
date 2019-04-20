@@ -2,28 +2,38 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { deleteExpedition } from "../redux/actions/allExped.actions";
+import { deleteCave } from "../redux/actions/allCave.actions";
 import { Button } from "reactstrap";
 
-const ExpedTableRow = props => {
-  const { _id, numberExpedition, dateExpedition, caveName } = props.item;
+const CaveTableRow = props => {
+  const { _id } = props.item;
 
   const deleteItem = _id => {
     return props.delete(_id);
   };
   const updateItem = _id => {
-    return props.history.push(`/admin/update-expedition/${_id}`);
+    return props.history.push(`/admin/update-cave/${_id}`);
   };
   return (
     <tr>
+      <td>{props.item.cadastralNumber}</td>
       <td>
-        <Link to={{ pathname: `/admin/expedition/${_id}` }}>
-          {numberExpedition}
+        <Link to={{ pathname:`/admin/cave/${_id}` }}>
+          {props.item.name}
         </Link>
       </td>
-      <td>{dateExpedition}</td>
-      <td>{caveName}</td>
-
+      <td>{props.item.typeCave}</td>
+      <td>{props.item.lengthCave}</td>
+      <td>{props.item.address }</td>
+      <td>{props.item.numberRegion}</td>
+      <td>{props.item.square}</td>
+      <td>{props.item.volume}</td>
+      <td>{props.item.amplitude}</td>
+      <td>{props.item.coordinateX}</td>
+      <td>{props.item.coordinateY}</td>
+      <td>{props.item.typeRock}</td>
+      <td>{props.item.depthCave}</td>
+      <td>{props.item.createdAt}</td>
       <td>
         <Button
           onClick={() => {
@@ -53,12 +63,13 @@ const ExpedTableRow = props => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    delete: id => dispatch(deleteExpedition(id))
+    delete: id => dispatch(deleteCave(id))
   };
 };
 export default withRouter(
   connect(
     null,
     mapDispatchToProps
-  )(ExpedTableRow)
+  )(CaveTableRow)
 );
+

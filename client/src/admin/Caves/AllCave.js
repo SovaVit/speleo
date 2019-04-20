@@ -1,6 +1,47 @@
 import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { fetchPostsIfNeeded } from "../../redux/actions/allCave.actions";
+import TableCave from "./TableCave";
+import { Row, Button } from "reactstrap";
 
-const GetAllCaves = () => {
-  return <div>All Caves</div>;
+class GetAllCaves extends React.Component {
+  componentDidMount() {
+    this.props.get();
+  }
+
+  render() {
+    return (
+      <div>
+        <Row className="p-1 ml-1">
+          <Button
+            color="success"
+            size="sm"
+            onClick={() => this.props.history.push("/admin/add-cave")}
+          >
+            Create New
+          </Button>
+        </Row>
+        <Row>
+          <TableCave caves={this.props.caves} />
+        </Row>
+      </div>
+    );
+  }
+}
+const mapStateToProps = store => {
+  return {
+    caves: store.caves
+  };
 };
-export default GetAllCaves;
+const mapDispatchToProps = dispatch => {
+  return {
+    get: () => dispatch(fetchPostsIfNeeded())
+  };
+};
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(GetAllCaves)
+);

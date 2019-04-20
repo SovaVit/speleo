@@ -14,13 +14,11 @@ const errorHandler = (err, req, res, next) => {
     // todo: comment here for production
     // eslint-disable-next-line
     if (err.name === "ValidationError") {
-      return res.status(405).json(err);
+      return res.status(422).json(err);
     }
     if (err.status === 400) {
       return res.status(400).json(err);
     }
-
-    console.log(err.status, err.message);
   }
   if (err.name === "CastError") {
     return res.status(400).json(err);

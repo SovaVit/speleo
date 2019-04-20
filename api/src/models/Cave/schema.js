@@ -6,10 +6,6 @@ const schema = new Schema({
     type: String,
     required: [true]
   },
-  secondName: {
-    type: String,
-    required: [true]
-  },
   typeCave: {
     type: String,
     required: [true]
@@ -20,6 +16,30 @@ const schema = new Schema({
   },
   address: {
     type: String,
+    required: [true]
+  },
+  numberRegion: {
+    type: Number,
+    required: [true]
+  },
+  square: {
+    type: Number,
+    required: [true]
+  },
+  volume: {
+    type: Number,
+    required: [true]
+  },
+  amplitude: {
+    type: Number,
+    required: [true]
+  },
+  coordinateX: {
+    type: Number,
+    required: [true]
+  },
+  coordinateY: {
+    type: Number,
     required: [true]
   },
   typeRock: {
@@ -34,22 +54,14 @@ const schema = new Schema({
     type: String,
     required: [true]
   },
-  createdAt: {
-    type: String,
-    required: [true]
-  },
   depthCave: {
     type: Number,
     required: [true]
   },
-  expeditionId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Expedition"
-  },
-  photoId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Photo"
-  },
+  createdAt: {
+    type: String,
+    required: [true]
+  }
 });
 
 module.exports = { schema };

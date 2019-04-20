@@ -9,7 +9,7 @@ export function getOneExpedition(id) {
   return dispatch => {
     dispatch(request());
 
-    expeditionService.getOne(id).then(
+   return expeditionService.getOne(id).then(
       item => {
         dispatch(success(item.expedition));
       },

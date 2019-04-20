@@ -8,12 +8,8 @@ const schema = new Schema({
   },
   caveId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Cave",
-   // required: [true]
-  },
-  expeditionId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Expedition"
+    ref: "Cave"
+    // required: [true]
   }
 });
 
