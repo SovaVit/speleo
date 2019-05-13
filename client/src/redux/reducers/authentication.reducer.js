@@ -1,6 +1,6 @@
 import { userConstants } from "../actions/user.actions";
 
-const initialState = { isLogged: false, token: "", exp: null };
+const initialState = { isLogged: false, token: "", exp: null, error: null };
 
 export function authentication(state = initialState, action) {
   switch (action.type) {

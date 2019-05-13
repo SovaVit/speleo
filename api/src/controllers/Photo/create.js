@@ -1,20 +1,20 @@
 const { NotFound } = require("rest-api-errors");
-const { sendOne } = require("../../middleware");
 const _ = require("lodash");
 
 const create = ({ Photo }, { config }) => async (req, res, next) => {
-  
-  try { 
+  try {
     const photo = new Photo();
-    
+
     if (!req.file) {
       throw new NotFound(404, "There is no data");
     }
-    _.extend(photo, {photoPath: req.file.path});
-    
+
+    const filePath = "/uploads/" + req.file.filename;
+    _.extend(photo, { photoPath: filePath, caveId: req.body.caveId });
+
     await photo.save();
 
-    return sendOne(res, photo);
+    return res.status(200).send({ photo });
   } catch (error) {
     next(error);
   }

@@ -18,14 +18,9 @@ class AddExpedition extends React.Component {
   handleChange(html) {
     this.setState({ editorHtml: html });
   }
-  handleSubmit(e, form) {
-    const date = {
-      numberExpedition: e.number,
-      dateExpedition: e.date,
-      caveName: e.cave,
-      description: this.state.editorHtml
-    };
-    this.props.create(date);
+  handleSubmit(event, form) {
+    event.description = this.state.editorHtml;
+    this.props.create(event);
     this.setState({ editorHtml: "" });
     form.reset();
   }
@@ -33,11 +28,12 @@ class AddExpedition extends React.Component {
     return this.props.history.push("/admin/expedition");
   }
   render() {
-
     return (
-      <div>
+      <>
         <Alert color="primary" className="row">
-          <div className="text-left col-md-8"><h5>Добавити експедицію</h5></div>
+          <div className="text-left col-md-8">
+            <h5>Добавити експедицію</h5>
+          </div>
           <div className="text-right col-md-4">
             <Button color="primary" onClick={this.handleExit}>
               Вихід
@@ -64,7 +60,7 @@ class AddExpedition extends React.Component {
             )}
           </Col>
         </Row>
-      </div>
+      </>
     );
   }
 }

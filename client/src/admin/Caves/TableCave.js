@@ -23,15 +23,10 @@ class TableCave extends React.PureComponent {
             <th>Length</th>
             <th>Address</th>
             <th>Region</th>
-            <th>Square</th>
-            <th>Volume</th>
             <th>Amplitude</th>
-            <th>CorX</th>
-            <th>CorY</th>
-            <th>Rock Type</th>
             <th>Depth</th>
-            <th>Date</th>
             <th>Update</th>
+            <th>Photo</th>
             <th>Delete</th>
           </tr>
         </thead>

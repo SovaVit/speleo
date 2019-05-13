@@ -11,13 +11,13 @@ const UserContainer = props => {
   };
 
   return (
-    <div>
+    <>
       {props.user.isLogged === false ? (
         <User handleSubmit={handleSubmit} Error={props.user.error} />
       ) : (
         <Redirect to="/admin" />
       )}
-    </div>
+    </>
   );
 };
 const mapStateToProps = store => {

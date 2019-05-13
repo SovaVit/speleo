@@ -11,7 +11,7 @@ class OneCave extends React.Component {
   render() {
     const { error, isFetching, item } = this.props.cave;
     return (
-      <div>
+      <>
         {error !== null && <Alert color="danger">Помилка завантаження!</Alert>}
         {isFetching === true && <Alert>Завантаження!</Alert>}
         <div>
@@ -32,7 +32,7 @@ class OneCave extends React.Component {
          
           <div dangerouslySetInnerHTML={{ __html: item.description }} />
         </div>
-      </div>
+      </>
     );
   }
 }

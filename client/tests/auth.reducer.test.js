@@ -1,7 +1,7 @@
 import { userConstants } from "../src/redux/actions/user.actions";
 import { authentication } from "../src/redux/reducers/authentication.reducer";
 
-const initialState = { isLogged: false, token: "" };
+const initialState = { isLogged: false, token: "", exp: null, error: null };
 
 describe("AuthReducer", () => {
   it("request", () => {
@@ -17,10 +17,11 @@ describe("AuthReducer", () => {
   it("success", () => {
     const action = {
       type: userConstants.LOGIN_SUCCESS,
-      user: { token: "token" }
+      user: { token: "token", exp: "123" }
     };
     expect(authentication(initialState, action)).toEqual({
       ...initialState,
+      exp: "123",
       isLogged: true,
       token: action.user.token,
       error: null

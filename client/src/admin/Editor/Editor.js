@@ -8,7 +8,7 @@ class Editor extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <ReactQuill
           theme="snow"
           onChange={this.props.handleChange}
@@ -18,7 +18,7 @@ class Editor extends React.Component {
           bounds={".root"}
           placeholder={this.props.placeholder}
         />
-      </div>
+      </>
     );
   }
 }

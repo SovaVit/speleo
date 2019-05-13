@@ -1,40 +1,27 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
 import { Button, FormGroup, Label, Input } from "reactstrap";
-import {Select} from '../../SelectInput/SelectInput'
+import { Select, CavesOptions } from "../../SelectInput/SelectInput";
+
+const required = value => (value ? undefined : "Required");
 
 export default class AddExpeditionForm extends React.Component {
-     handleValidate = values => {
-        const errors = {};
-
-       if(!values.date){
-        errors.date = "Required";
-       }
-       if(!values.number){
-        errors.number = "Required";
-       }
-       if(!values.cave){
-        errors.cave = "Required";
-       }
-        return errors;
-      }
   render() {
     return (
       <div className="col-sm-12 col-md-12 col-lg-12">
         <Form
           onSubmit={this.props.handleSubmit}
-          validate={this.handleValidate}
+          initialValues={this.props.initialValues}
           render={({ handleSubmit, submitting, submitError }) => (
             <form onSubmit={handleSubmit}>
-
-              <Field name="number">
+              <Field name="numberExpedition" validate={required}>
                 {({ input, meta }) => (
                   <FormGroup>
                     <Label>№ Експедиції</Label>
                     <Input
                       {...input}
                       type="text"
-                      placeholder="номер експедиції"
+                      placeholder="№ експедиції"
                     />
                     {meta.error && meta.touched && (
                       <span className="text-danger">{meta.error}</span>
@@ -42,7 +29,7 @@ export default class AddExpeditionForm extends React.Component {
                   </FormGroup>
                 )}
               </Field>
-              <Field name="date">
+              <Field name="dateExpedition" validate={required}>
                 {({ input, meta }) => (
                   <FormGroup>
                     <Label>Дата проведення</Label>
@@ -53,12 +40,12 @@ export default class AddExpeditionForm extends React.Component {
                   </FormGroup>
                 )}
               </Field>
-              <Field name="cave">
+              <Field name="caveName" validate={required}>
                 {({ input, meta }) => (
                   <FormGroup>
                     <Label>Печера</Label>
-                    
-                    <Select {...input} type="select" placeholder="печера"/>                  
+
+                    <Select {...input} type="select" options={CavesOptions} />
                     {meta.error && meta.touched && (
                       <span className="text-danger">{meta.error}</span>
                     )}

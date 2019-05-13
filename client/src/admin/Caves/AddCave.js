@@ -29,7 +29,7 @@ class AddCave extends React.Component {
   }
   render() {
     return (
-      <div>
+      <>
         <Alert color="primary" className="row">
           <div className="text-left col-md-8">
             <h5>Внесення даних про печеру</h5>
@@ -40,12 +40,8 @@ class AddCave extends React.Component {
             </Button>
           </div>
         </Alert>
-
         <Row>
-          <Col md="3">
-            <AddCaveForm handleSubmit={this.handleSubmit} />
-          </Col>
-          <Col md="8">
+          <Col md={{ size: 10, offset: 1 }}>
             <Alert>Опис :</Alert>
             <Editor
               handleChange={this.handleChange}
@@ -53,6 +49,8 @@ class AddCave extends React.Component {
             />
           </Col>
         </Row>
+        <AddCaveForm handleSubmit={this.handleSubmit} />
+
         <Row>
           <Col>
             {this.props.error !== null && (
@@ -60,7 +58,7 @@ class AddCave extends React.Component {
             )}
           </Col>
         </Row>
-      </div>
+      </>
     );
   }
 }

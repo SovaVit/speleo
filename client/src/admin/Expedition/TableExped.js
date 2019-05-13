@@ -3,7 +3,6 @@ import ExpedTableRow from "../../expedTable/expedTableRow";
 import { Table, Alert } from "reactstrap";
 
 class TableExpedition extends React.PureComponent {
-
   RenderTable = () => {
     const { items } = this.props.expeditions;
     const expeditionTemplate = items.map(item => (
@@ -18,7 +17,7 @@ class TableExpedition extends React.PureComponent {
       <Table>
         <thead>
           <tr>
-            <th>Expedition Number</th>
+            <th>Number</th>
             <th>Date</th>
             <th>Cave</th>
             <th>Update</th>

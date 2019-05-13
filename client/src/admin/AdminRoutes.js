@@ -8,18 +8,20 @@ import UpdateCave from "./Caves/UpdateCave";
 import AddExpedition from "./Expedition/AddExpedition";
 import OneExpedition from "./Expedition/OneExpedition";
 import UpdateExpedition from "./Expedition/UpdateExpedition";
+import PhotoGallery from "./Photo/photo";
 
 const AdminRoutes = () => (
   <Switch>
     <Redirect exact from={"/admin"} to={"/admin/cave"} />
     <Route path="/admin/cave/:id" component={OneCave} />
-    <Route path="/admin/cave" component={GetAllCaves} />  
+    <Route path="/admin/cave" component={GetAllCaves} />
     <Route path="/admin/add-cave" component={AddCave} />
     <Route path="/admin/update-cave/:id" component={UpdateCave} />
     <Route path="/admin/expedition/:id" component={OneExpedition} />
     <Route path="/admin/expedition" component={GetAllExpeditions} />
     <Route path="/admin/add-expedition" component={AddExpedition} />
     <Route path="/admin/update-expedition/:id" component={UpdateExpedition} />
+    <Route path="/admin/photo/:id" component={PhotoGallery} />
   </Switch>
 );
 export default AdminRoutes;

@@ -9,7 +9,7 @@ export const allCaveConstants = {
   UPDATE_CAVE_SUCCESS: "UPDATE_CAVE_SUCCESS"
 };
 
- function getAllCaves() {
+function getAllCaves() {
   return dispatch => {
     dispatch(request());
 
@@ -52,6 +52,7 @@ export function setCave(cave) {
 export function updateCave(id, cave) {
   return (dispatch, getState) => {
     const token = getState().user.token;
+
     return caveService.update(id, cave, token).then(
       item => {
         dispatch(updateSuccess(item.cave));
@@ -94,25 +95,23 @@ function errorHandler(dispatch, error) {
   dispatch(failure(error));
 }
 function shouldFetchPosts(state) {
-  const {items, isFetching} = state.caves;
-  if (!items) {
-    return true
+  const { items, isFetching } = state.caves;
+  if (items > 150) {
+    return true;
   } else if (isFetching) {
-    return false
+    return false;
   } else {
-    return true
+    return true;
   }
 }
 
 export function fetchPostsIfNeeded() {
-
   return (dispatch, getState) => {
     if (shouldFetchPosts(getState())) {
-  
-      return dispatch(getAllCaves())
+      return dispatch(getAllCaves());
     } else {
       // Let the calling code know there's nothing to wait for.
-      return Promise.resolve()
+      return Promise.resolve();
     }
-  }
+  };
 }

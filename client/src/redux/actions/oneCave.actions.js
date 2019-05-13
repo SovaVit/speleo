@@ -5,7 +5,7 @@ export const oneCaveConstants = {
   ONE_CAVE_FAILURE: "ONE_CAVE_FAILURE"
 };
 
-function getOneCave(id) {
+export function getOneCave(id) {
   return dispatch => {
     dispatch(request());
 

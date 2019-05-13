@@ -1,23 +1,23 @@
-import { allCaveConstants } from "../actions/allCave.actions";
+import { photoConstants } from "../actions/photo.actions";
 
 const initialState = { isFetching: false, items: [], error: null };
 
-export function allCave(state = initialState, action) {
+export function allPhoto(state = initialState, action) {
   switch (action.type) {
-    case allCaveConstants.ALL_CAVE_REQUEST:
+    case photoConstants.PHOTO_REQUEST:
       return {
         isFetching: true,
         items: [],
         error: null
       };
-    case allCaveConstants.ALL_CAVE_SUCCESS:
+    case photoConstants.PHOTO_SUCCESS:
       return {
         isFetching: false,
         items: action.items,
         error: null
       };
 
-    case allCaveConstants.DELETE_CAVE_SUCCESS:
+    case photoConstants.DELETE_PHOTO_SUCCESS:
       const newState = state.items.filter(item => {
         return item._id !== action.item._id;
       });
@@ -26,23 +26,14 @@ export function allCave(state = initialState, action) {
         items: newState,
         error: null
       };
-    case allCaveConstants.CREATE_CAVE_SUCCESS:
+    case photoConstants.CREATE_PHOTO_SUCCESS:
       return {
         isFetching: false,
         items: [...state.items, action.item],
         error: null
       };
-    case allCaveConstants.UPDATE_CAVE_SUCCESS:
-      const State = state.items.filter(item => {
-        return item._id !== action.item._id;
-      });
-      return {
-        isFetching: false,
-        items: [...State, action.item],
-        error: null
-      };
 
-    case allCaveConstants.ALL_CAVE_FAILURE:
+    case photoConstants.PHOTO_FAILURE:
       return {
         isFetching: false,
         items: [],

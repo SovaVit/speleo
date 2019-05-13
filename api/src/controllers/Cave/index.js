@@ -6,9 +6,8 @@ const { create } = require("./create");
 const { update } = require("./update");
 const { remove } = require("./remove");
 
-
 /**
- * Provide api for posts
+ * Provide api for caves
  *
  *
  * GET /api/posts/ - List ??

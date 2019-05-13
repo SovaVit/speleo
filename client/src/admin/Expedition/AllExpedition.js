@@ -12,7 +12,7 @@ class GetAllExpeditions extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <Row className="p-1 ml-1">
           <Button
             color="success"
@@ -25,7 +25,7 @@ class GetAllExpeditions extends React.Component {
         <Row>
           <TableExpedition expeditions={this.props.expeditions} />
         </Row>
-      </div>
+      </>
     );
   }
 }

@@ -1,5 +1,4 @@
 const _ = require("lodash");
-const { sendList } = require("../../middleware/requests-helpers");
 
 const list = ({ Cave }, { config }) => async (req, res, next) => {
   let { limit, skip, search } = req.query;
@@ -17,7 +16,7 @@ const list = ({ Cave }, { config }) => async (req, res, next) => {
       .limit(limit)
       .sort({ _id: -1 });
 
-    sendList(res,{ cave} );
+    return res.status(200).send({ cave });
   } catch (error) {
     next(error);
   }

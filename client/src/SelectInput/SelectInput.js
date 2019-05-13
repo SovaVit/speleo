@@ -1,17 +1,20 @@
 import React from 'react';
 import {Input} from 'reactstrap';
 
-const SelectOptions = ["...","Озерна","Млинки","Оптимістична"];
+export const CavesOptions = ["...","Озерна","Млинки","Оптимістична"];
+export const typeCaves = ["...","Вертикальна","Горизонтальна"];
+export const region = ["...", 1, 2, 3, 4, 5];
+export const typeRock =["...", "Гіпсова", "Вапнякова"];
 
 export const Select = (props) => {
 
-const handleOptions=() => {
+const handleOptions=(options) => {
    
-return SelectOptions.map((item,index) => {return <option key={index} value={item}>{item}</option>}) 
+return options.map((item,index) => {return <option key={index} value={item}>{item}</option>}) 
 };
 return(
     <Input {...props} >
-           {handleOptions()}
+           {handleOptions(props.options)}
           </Input>
 )
 };

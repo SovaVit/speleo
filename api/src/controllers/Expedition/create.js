@@ -1,12 +1,12 @@
-const { NotAcceptable } = require("rest-api-errors");
-const { sendOne } = require("../../middleware");
+const { MethodNotAllowed } = require("rest-api-errors");
+
 const _ = require("lodash");
 
-const create = ({ Expedition  }, { config }) => async (req, res, next) => {
+const create = ({ Expedition }, { config }) => async (req, res, next) => {
   try {
-    const expedition  = new Expedition();
+    const expedition = new Expedition();
     if (!req.body) {
-      throw new NotAcceptable(405, "Should by body");
+      throw new MethodNotAllowed(405, "Should by body");
     }
     _.extend(expedition, req.body);
 

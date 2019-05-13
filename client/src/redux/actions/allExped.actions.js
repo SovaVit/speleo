@@ -52,6 +52,7 @@ export function setExpedition(expedition) {
 export function updateExpedition(id, expedition) {
   return (dispatch, getState) => {
     const token = getState().user.token;
+
     return expeditionService.update(id, expedition, token).then(
       item => {
         dispatch(updateSuccess(item.expedition));

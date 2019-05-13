@@ -39,6 +39,7 @@ async function create(cave, token) {
   return items;
 }
 async function update(id, cave, token) {
+ 
   const requestOptions = {
     method: "PATCH",
     headers: authHeader(token),

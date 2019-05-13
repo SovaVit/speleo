@@ -12,7 +12,7 @@ class GetAllCaves extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <Row className="p-1 ml-1">
           <Button
             color="success"
@@ -25,7 +25,7 @@ class GetAllCaves extends React.Component {
         <Row>
           <TableCave caves={this.props.caves} />
         </Row>
-      </div>
+      </>
     );
   }
 }

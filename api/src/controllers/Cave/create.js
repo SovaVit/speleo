@@ -1,5 +1,4 @@
 const { NotAcceptable } = require("rest-api-errors");
-const { sendOne } = require("../../middleware");
 const _ = require("lodash");
 
 const create = ({ Cave }, { config }) => async (req, res, next) => {
@@ -13,7 +12,7 @@ const create = ({ Cave }, { config }) => async (req, res, next) => {
 
     await cave.save();
 
-    return sendOne(res, { cave });
+    return res.status(200).send({ cave });
   } catch (error) {
     next(error);
   }

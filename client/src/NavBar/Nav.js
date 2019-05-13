@@ -26,11 +26,6 @@ const NavBar = props => {
         </li>
         <li className={styles.list__item}>
           <NavLink to="/">
-            <span>Фотогалерея</span>
-          </NavLink>
-        </li>
-        <li className={styles.list__item}>
-          <NavLink to="/">
             <span>Експедиції </span>
           </NavLink>
         </li>

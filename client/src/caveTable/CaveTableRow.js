@@ -14,26 +14,22 @@ const CaveTableRow = props => {
   const updateItem = _id => {
     return props.history.push(`/admin/update-cave/${_id}`);
   };
+  const photoGallery = _id => {
+    return props.history.push(`/admin/photo/${_id}`);
+  };
   return (
     <tr>
       <td>{props.item.cadastralNumber}</td>
       <td>
-        <Link to={{ pathname:`/admin/cave/${_id}` }}>
-          {props.item.name}
-        </Link>
+        <Link to={{ pathname: `/admin/cave/${_id}` }}>{props.item.name}</Link>
       </td>
       <td>{props.item.typeCave}</td>
       <td>{props.item.lengthCave}</td>
-      <td>{props.item.address }</td>
+      <td>{props.item.address}</td>
       <td>{props.item.numberRegion}</td>
-      <td>{props.item.square}</td>
-      <td>{props.item.volume}</td>
       <td>{props.item.amplitude}</td>
-      <td>{props.item.coordinateX}</td>
-      <td>{props.item.coordinateY}</td>
-      <td>{props.item.typeRock}</td>
       <td>{props.item.depthCave}</td>
-      <td>{props.item.createdAt}</td>
+
       <td>
         <Button
           onClick={() => {
@@ -44,6 +40,18 @@ const CaveTableRow = props => {
           color="primary"
         >
           Update
+        </Button>{" "}
+      </td>
+      <td>
+        <Button
+          onClick={() => {
+            photoGallery(_id);
+          }}
+          outline
+          size="sm"
+          color="primary"
+        >
+          Photo
         </Button>{" "}
       </td>
       <td>
@@ -72,4 +80,3 @@ export default withRouter(
     mapDispatchToProps
   )(CaveTableRow)
 );
-

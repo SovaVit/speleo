@@ -4,7 +4,7 @@ import NotFound from "../NotFound/NotFound";
 import requireAuth from "../utilities/AuthenticatedComponent/index";
 import Home from "../home/home";
 import Admin from "../admin/admin";
-import UserContainer  from "../adminLigIn/UserContainer";
+import UserContainer  from "../adminLogIn/UserContainer";
 
 
 class Routes extends React.Component {
