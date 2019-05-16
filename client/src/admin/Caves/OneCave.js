@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { FetchIfNeeded } from "../../redux/actions/oneCave.actions";
 import { Alert } from "reactstrap";
+//import NotFound from '../../NotFound/NotFound'
 
 class OneCave extends React.Component {
   componentDidMount() {
@@ -14,6 +15,7 @@ class OneCave extends React.Component {
       <>
         {error !== null && <Alert color="danger">Помилка завантаження!</Alert>}
         {isFetching === true && <Alert>Завантаження!</Alert>}
+        {/* {item === null && <NotFound/>} */}
         <div>
           <div>{item.cadastralNumber}</div>
           <div> {item.name}</div>
@@ -29,7 +31,7 @@ class OneCave extends React.Component {
           <div>{item.typeRock}</div>
           <div>{item.depthCave}</div>
           <div>{item.createdAt}</div>
-         
+
           <div dangerouslySetInnerHTML={{ __html: item.description }} />
         </div>
       </>

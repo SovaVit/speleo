@@ -2,8 +2,7 @@ import React from "react";
 import { Form, Field } from "react-final-form";
 import { Button, FormGroup, Label, Input } from "reactstrap";
 import { Select, CavesOptions } from "../../SelectInput/SelectInput";
-
-const required = value => (value ? undefined : "Required");
+import { required } from "../../utilities/helpers/validate";
 
 export default class AddExpeditionForm extends React.Component {
   render() {
@@ -18,11 +17,7 @@ export default class AddExpeditionForm extends React.Component {
                 {({ input, meta }) => (
                   <FormGroup>
                     <Label>№ Експедиції</Label>
-                    <Input
-                      {...input}
-                      type="text"
-                      placeholder="№ експедиції"
-                    />
+                    <Input {...input} type="text" placeholder="№ експедиції" />
                     {meta.error && meta.touched && (
                       <span className="text-danger">{meta.error}</span>
                     )}

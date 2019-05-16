@@ -11,7 +11,7 @@ export function getOneCave(id) {
 
     return caveService.getOne(id).then(
       item => {
-        dispatch(success(item));
+        dispatch(success(item.cave));
       },
       error => {
         dispatch(failure(error));

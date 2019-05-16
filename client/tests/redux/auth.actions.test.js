@@ -1,5 +1,5 @@
-import { userActions} from "../src/redux/actions/user.actions";
-import {userConstants} from "../src/redux/actions/user.actions";
+import { userActions} from "../../src/redux/actions/user.actions";
+import {userConstants} from "../../src/redux/actions/user.actions";
 import configureMockStore from "redux-mock-store";
 
 import thunk from "redux-thunk";

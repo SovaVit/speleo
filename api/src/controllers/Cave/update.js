@@ -7,7 +7,7 @@ const update = ({ Cave }, { config }) => async (req, res, next) => {
     const cave = await Cave.findOne({ _id });
     _.extend(cave, req.body);
     await cave.save();
-    res.status(200).send({ cave });
+    res.status(200).send({ cave }).end();
   } catch (error) {
     next(error);
   }

@@ -1,8 +1,8 @@
 import {
     oneCave,
     initialState
-  } from "../src/redux/reducers/oneCave.reducer";
-  import { oneCaveConstants } from "../src/redux/actions/oneCave.actions";
+  } from "../../src/redux/reducers/oneCave.reducer";
+  import { oneCaveConstants } from "../../src/redux/actions/oneCave.actions";
   
   describe("OneCaveReducer", () => {
     it("request", () => {

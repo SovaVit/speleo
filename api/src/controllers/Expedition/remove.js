@@ -4,7 +4,7 @@ const remove = ({ Expedition }, { config }) => async (req, res, next) => {
     const expedition = await Expedition.findOne({ _id });
     await Expedition.deleteOne({ _id });
 
-    res.status(200).send({ expedition });
+    res.status(200).send({ expedition }).end();
   } catch (error) {
     next(error);
   }

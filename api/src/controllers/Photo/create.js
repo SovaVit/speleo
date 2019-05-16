@@ -14,7 +14,7 @@ const create = ({ Photo }, { config }) => async (req, res, next) => {
 
     await photo.save();
 
-    return res.status(200).send({ photo });
+    return res.status(200).send({ photo }).end();
   } catch (error) {
     next(error);
   }

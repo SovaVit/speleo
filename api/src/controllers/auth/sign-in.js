@@ -1,9 +1,9 @@
-const { sendOne, authenticate } = require("../../middleware");
-
 const signIn = (req, res) => {
-
   const { token, exp } = req;
-  return sendOne(res, { token, exp });
+  return res
+    .status(200)
+    .send({ token, exp })
+    .end();
 };
 
 module.exports = signIn;

@@ -1,8 +1,8 @@
-const { sendOne } = require("../../middleware");
-
 const signOut = (req, res) => {
-  
-  sendOne(res, { success: true });
+  res
+    .status(200)
+    .send({ success: true })
+    .end();
 };
 
 module.exports = signOut;

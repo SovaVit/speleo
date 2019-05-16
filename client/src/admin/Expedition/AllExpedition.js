@@ -1,34 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getAllExpeditions } from "../../redux/actions/allExped.actions";
 import TableExpedition from "./TableExped";
 import { Row, Button } from "reactstrap";
 
-class GetAllExpeditions extends React.Component {
-  componentDidMount() {
-    this.props.get();
-  }
+const GetAllExpeditions = props => {
+  
+  useEffect(() => {
+    props.get();
+  }, []);
 
-  render() {
-    return (
-      <>
-        <Row className="p-1 ml-1">
-          <Button
-            color="success"
-            size="sm"
-            onClick={() => this.props.history.push("/admin/add-expedition")}
-          >
-            Create New
-          </Button>
-        </Row>
-        <Row>
-          <TableExpedition expeditions={this.props.expeditions} />
-        </Row>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Row className="p-1 ml-1">
+        <Button
+          color="success"
+          size="sm"
+          onClick={() => props.history.push("/admin/add-expedition")}
+        >
+          Create New
+        </Button>
+      </Row>
+      <Row>
+        <TableExpedition expeditions={props.expeditions} />
+      </Row>
+    </>
+  );
+};
 const mapStateToProps = store => {
   return {
     expeditions: store.expeditions

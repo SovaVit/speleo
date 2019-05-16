@@ -1,36 +1,35 @@
-import {
-  allExpedition,
-  initialState
-} from "../src/redux/reducers/allExped.reducer";
-import { allExpeditionConstants } from "../src/redux/actions/allExped.actions";
+import { allCave, initialState} from "../../src/redux/reducers/allCave.reducer";
+import { allCaveConstants } from "../../src/redux/actions/allCave.actions";
 
-describe("AllExpeditionReducer", () => {
+describe("AllCavesReducer", () => {
+
   it("request", () => {
     const action = {
-      type: allExpeditionConstants.ALL_EXPEDITIONS_REQUEST
+      type: allCaveConstants.ALL_CAVE_REQUEST
     };
-    expect(allExpedition(initialState, action)).toEqual({
-      ...initialState,
-      isFetching: true
+    expect(allCave(initialState, action)).toEqual({
+      error: null,
+      isFetching: true,
+      items:[]
     });
   });
   it("success", () => {
     const action = {
-      type: allExpeditionConstants.ALL_EXPEDITIONS_SUCCESS,
+      type: allCaveConstants.ALL_CAVE_SUCCESS,
       items: [1, 2, 3]
     };
-    expect(allExpedition(initialState, action)).toEqual({
-      ...initialState,
+    expect(allCave(initialState, action)).toEqual({
+      error: null,
       isFetching: false,
       items: action.items
     });
   });
   it("failure", () => {
     const action = {
-      type: allExpeditionConstants.ALL_EXPEDITIONS_FAILURE,
+      type: allCaveConstants.ALL_CAVE_FAILURE,
       error: { status: 401, statusText: "Unauthorized" }
     };
-    expect(allExpedition(initialState, action)).toEqual({
+    expect(allCave(initialState, action)).toEqual({
       ...initialState,
       isFetching: false,
       items: [],
@@ -40,12 +39,12 @@ describe("AllExpeditionReducer", () => {
   });
   it("delete", () => {
     const action = {
-      type: allExpeditionConstants.DELETE_EXPEDITIONS_SUCCESS,
+      type: allCaveConstants.DELETE_CAVE_SUCCESS,
       item: { _id: 1 }
     };
     const oldState = { items: [{ _id: 1 }, { _id: 2 }, { _id: 3 }] };
 
-    expect(allExpedition(oldState, action)).toEqual({
+    expect(allCave(oldState, action)).toEqual({
       isFetching: false,
       items: [{ _id: 2 }, { _id: 3 }],
       error: null
@@ -53,12 +52,12 @@ describe("AllExpeditionReducer", () => {
   });
   it("create", () => {
     const action = {
-      type: allExpeditionConstants.CREATE_EXPEDITIONS_SUCCESS,
+      type: allCaveConstants.CREATE_CAVE_SUCCESS,
       item: { _id: 1 }
     };
     const oldState = { items: [{ _id: 2 }, { _id: 3 }] };
 
-    expect(allExpedition(oldState, action)).toEqual({
+    expect(allCave(oldState, action)).toEqual({
       isFetching: false,
       items: [{ _id: 2 }, { _id: 3 }, action.item],
       error: null
@@ -66,11 +65,11 @@ describe("AllExpeditionReducer", () => {
   });
   it("update", () => {
     const action = {
-      type: allExpeditionConstants.UPDATE_EXPEDITIONS_SUCCESS,
+      type: allCaveConstants.UPDATE_CAVE_SUCCESS,
       item: { _id: 1, t: "t" }
     };
     const oldState = { items: [{ _id: 1, t: "v" }, { _id: 2 }, { _id: 3 }] };
-    expect(allExpedition(oldState, action)).toEqual({
+    expect(allCave(oldState, action)).toEqual({
       isFetching: false,
       items: [{ _id: 2 }, { _id: 3 }, action.item],
       error: null

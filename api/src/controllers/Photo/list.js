@@ -12,7 +12,7 @@ const list = ({ Photo }, { config }) => async (req, res, next) => {
     const photo = await Photo.find(query)
       .sort({ _id: -1 });
 
-    res.status(200).send({ photo });
+    res.status(200).send({ photo }).end();
   } catch (error) {
     next(error);
   }

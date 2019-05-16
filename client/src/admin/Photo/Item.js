@@ -1,12 +1,19 @@
 import React from "react";
 import { Button } from "reactstrap";
+import * as css from "./photo.module.css";
 
 const Item = props => {
   return (
-    <div>
+    <div className={css.item}>
       {" "}
-      <img src={props.path} alt="Cave" height="250" width="250" />
-      <Button outline color="danger">primary</Button>{" "}
+      <img src={props.path} alt="Cave" height="200" width="300" />
+      <Button
+        outline
+        color="danger"
+        onClick={() => props.handleDelete(props.id)}
+      >
+        Видалити
+      </Button>{" "}
     </div>
   );
 };

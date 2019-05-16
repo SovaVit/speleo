@@ -10,7 +10,7 @@ const { remove } = require("./remove");
  * Provide api for caves
  *
  *
- * GET /api/posts/ - List ??
+ * GET /api/caves/ - List ??
      @header
             Authorization: Bearer {token}
  **/

@@ -1,8 +1,11 @@
 const { Router: router } = require("express");
-const { authenticate, generateAccessToken } = require("../../middleware");
+const {
+  authenticate,
+  generateAccessToken,
+  localUser
+} = require("../../middleware");
 const signIn = require("./sign-in");
 const signOut = require("./sign-out");
-const {localUser} = require('../../middleware')
 
 /**
  * Provide Api for Auth
@@ -34,11 +37,9 @@ const {localUser} = require('../../middleware')
 module.exports = (models, { config }) => {
   const api = router();
 
-  api.post(
-    "/sign-in", localUser, generateAccessToken, signIn );
+  api.post("/sign-in", localUser, generateAccessToken, signIn);
 
   api.post("/sign-out", authenticate, signOut);
-
 
   return api;
 };

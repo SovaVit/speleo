@@ -1,30 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { FetchIfNeeded } from "../../redux/actions/oneExped.actions";
 import { Alert } from "reactstrap";
 
-class OneExpedition extends React.Component {
-  componentDidMount() {
-    const { id } = this.props.match.params;
-    this.props.getOne(id);
-  }
-  render() {
-    const { error, isFetching, item } = this.props.expedition;
-    return (
-      <>
-        {error !== null && <Alert color="danger">Помилка завантаження!</Alert>}
-        {isFetching === true && <Alert>Завантаження!</Alert>}
-        <>
-          <div>{item.caveName}</div>
-          <div>{item.dateExpedition}</div>
-          <div dangerouslySetInnerHTML={{ __html: item.description }} />
+const OneExpedition = props => {
+  useEffect(() => {
+    const { id } = props.match.params;
+    props.getOne(id);
+  }, []);
 
-          <div>{item.numberExpedition}</div>
-        </>
+  const { error, isFetching, item } = props.expedition;
+  return (
+    <>
+      {error !== null && <Alert color="danger">Помилка завантаження!</Alert>}
+      {isFetching === true && <Alert>Завантаження!</Alert>}
+      <>
+        <div>{item.caveName}</div>
+        <div>{item.dateExpedition}</div>
+        <div dangerouslySetInnerHTML={{ __html: item.description }} />
+
+        <div>{item.numberExpedition}</div>
       </>
-    );
-  }
-}
+    </>
+  );
+};
 const mapStateToProps = store => {
   return {
     expedition: store.expedition

@@ -3,8 +3,8 @@ import {
   deleteCave,
   updateCave,
   setCave
-} from "../src/redux/actions/allCave.actions";
-import { allCaveConstants } from "../src/redux/actions/allCave.actions";
+} from "../../src/redux/actions/allCave.actions";
+import { allCaveConstants } from "../../src/redux/actions/allCave.actions";
 import configureMockStore from "redux-mock-store";
 
 import thunk from "redux-thunk";

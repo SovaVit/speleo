@@ -1,5 +1,5 @@
-import { userConstants } from "../src/redux/actions/user.actions";
-import { authentication } from "../src/redux/reducers/authentication.reducer";
+import { userConstants } from "../../src/redux/actions/user.actions";
+import { authentication } from "../../src/redux/reducers/authentication.reducer";
 
 const initialState = { isLogged: false, token: "", exp: null, error: null };
 

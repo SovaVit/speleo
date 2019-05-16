@@ -1,8 +1,8 @@
 import {
     oneExpedition,
     initialState
-  } from "../src/redux/reducers/oneExped.reducer";
-  import { oneExpeditionConstants } from "../src/redux/actions/oneExped.actions";
+  } from "../../src/redux/reducers/oneExped.reducer";
+  import { oneExpeditionConstants } from "../../src/redux/actions/oneExped.actions";
   
   describe("OneExpeditionReducer", () => {
     it("request", () => {

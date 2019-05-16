@@ -16,7 +16,7 @@ const list = ({ Cave }, { config }) => async (req, res, next) => {
       .limit(limit)
       .sort({ _id: -1 });
 
-    return res.status(200).send({ cave });
+    return res.status(200).send({ cave }).end();
   } catch (error) {
     next(error);
   }

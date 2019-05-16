@@ -10,7 +10,7 @@ const list = ({ Expedition }, { config }) => async (req, res, next) => {
     }
     const expedition = await Expedition.find(query).sort({ _id: -1 });
 
-    res.status(200).send({ expedition });
+    res.status(200).send({ expedition }).end();
   } catch (error) {
     next(error);
   }

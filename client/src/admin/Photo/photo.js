@@ -16,6 +16,9 @@ class PhotoGallery extends React.Component {
     data.append("caveId", this.props.match.params.id);
     this.props.setPhoto(data);
   };
+  handleDelete = id =>{
+    this.props.deletePhoto(id);
+  };
 
   render() {
     return (
@@ -23,7 +26,8 @@ class PhotoGallery extends React.Component {
        <div className={css.alert}>
         Фотогалерея!
       </div>
-        <Gallery items={this.props.photo.items}/>
+        <Gallery items={this.props.photo.items}
+        handleDelete={this.handleDelete}/>
         <Loader onDrop={this.onDrop} />
       </div>
     );

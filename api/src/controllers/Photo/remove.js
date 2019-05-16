@@ -14,7 +14,10 @@ const remove = ({ Photo }, { config }) => async (req, res, next) => {
     });
     await Photo.deleteOne({ _id });
 
-    res.status(200).send({ photo });
+    res
+      .status(200)
+      .send({ photo })
+      .end();
   } catch (error) {
     next(error);
   }

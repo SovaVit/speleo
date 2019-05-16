@@ -1,5 +1,5 @@
-import { getAllExpeditions, deleteExpedition, setExpedition, updateExpedition } from "../src/redux/actions/allExped.actions";
-import { allExpeditionConstants } from "../src/redux/actions/allExped.actions";
+import { getAllExpeditions, deleteExpedition, setExpedition, updateExpedition } from "../../src/redux/actions/allExped.actions";
+import { allExpeditionConstants } from "../../src/redux/actions/allExped.actions";
 import configureMockStore from "redux-mock-store";
 
 import thunk from "redux-thunk";

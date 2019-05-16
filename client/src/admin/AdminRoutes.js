@@ -9,6 +9,7 @@ import AddExpedition from "./Expedition/AddExpedition";
 import OneExpedition from "./Expedition/OneExpedition";
 import UpdateExpedition from "./Expedition/UpdateExpedition";
 import PhotoGallery from "./Photo/photo";
+import NotFound from "../NotFound/NotFound";
 
 const AdminRoutes = () => (
   <Switch>
@@ -22,6 +23,7 @@ const AdminRoutes = () => (
     <Route path="/admin/add-expedition" component={AddExpedition} />
     <Route path="/admin/update-expedition/:id" component={UpdateExpedition} />
     <Route path="/admin/photo/:id" component={PhotoGallery} />
+    <Route path="*" component={NotFound} />
   </Switch>
 );
 export default AdminRoutes;

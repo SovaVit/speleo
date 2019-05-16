@@ -8,11 +8,12 @@ import {
   region,
   typeRock
 } from "../../SelectInput/SelectInput";
-
-const required = value => (value ? undefined : "Required");
-const notEmpty = value => (value !== "..." ? undefined : "Required");
-const composeValidators = (...validators) => value =>
-  validators.reduce((error, validator) => error || validator(value), undefined);
+import {
+  required,
+  notEmpty,
+  notNumber,
+  composeValidators
+} from "../../utilities/helpers/validate";
 
 export default class AddCaveForm extends React.Component {
   render() {
@@ -57,7 +58,10 @@ export default class AddCaveForm extends React.Component {
                       </FormGroup>
                     )}
                   </Field>
-                  <Field name="lengthCave" validate={required}>
+                  <Field
+                    name="lengthCave"
+                    validate={composeValidators(required, notNumber)}
+                  >
                     {({ input, meta }) => (
                       <FormGroup>
                         <Label>Довжина печери</Label>
@@ -95,7 +99,10 @@ export default class AddCaveForm extends React.Component {
                   </Field>
                 </Col>
                 <Col md="4">
-                  <Field name="square" validate={required}>
+                  <Field
+                    name="square"
+                    validate={composeValidators(required, notNumber)}
+                  >
                     {({ input, meta }) => (
                       <FormGroup>
                         <Label>Площа</Label>
@@ -106,7 +113,10 @@ export default class AddCaveForm extends React.Component {
                       </FormGroup>
                     )}
                   </Field>
-                  <Field name="volume" validate={required}>
+                  <Field
+                    name="volume"
+                    validate={composeValidators(required, notNumber)}
+                  >
                     {({ input, meta }) => (
                       <FormGroup>
                         <Label>Об'єм</Label>
@@ -117,7 +127,10 @@ export default class AddCaveForm extends React.Component {
                       </FormGroup>
                     )}
                   </Field>
-                  <Field name="amplitude" validate={required}>
+                  <Field
+                    name="amplitude"
+                    validate={composeValidators(required, notNumber)}
+                  >
                     {({ input, meta }) => (
                       <FormGroup>
                         <Label>Амплітуда</Label>
@@ -128,7 +141,10 @@ export default class AddCaveForm extends React.Component {
                       </FormGroup>
                     )}
                   </Field>
-                  <Field name="coordinateX" validate={required}>
+                  <Field
+                    name="coordinateX"
+                    validate={composeValidators(required, notNumber)}
+                  >
                     {({ input, meta }) => (
                       <FormGroup>
                         <Label>КоординатиХ</Label>
@@ -139,7 +155,10 @@ export default class AddCaveForm extends React.Component {
                       </FormGroup>
                     )}
                   </Field>
-                  <Field name="coordinateY" validate={required}>
+                  <Field
+                    name="coordinateY"
+                    validate={composeValidators(required, notNumber)}
+                  >
                     {({ input, meta }) => (
                       <FormGroup>
                         <Label>КоординатиY</Label>
@@ -177,7 +196,10 @@ export default class AddCaveForm extends React.Component {
                       </FormGroup>
                     )}
                   </Field>
-                  <Field name="depthCave" validate={required}>
+                  <Field
+                    name="depthCave"
+                    validate={composeValidators(required, notNumber)}
+                  >
                     {({ input, meta }) => (
                       <FormGroup>
                         <Label>Глибина</Label>

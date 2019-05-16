@@ -96,7 +96,7 @@ function errorHandler(dispatch, error) {
 }
 function shouldFetchPosts(state) {
   const { items, isFetching } = state.caves;
-  if (items > 150) {
+  if (items < 150) {
     return true;
   } else if (isFetching) {
     return false;
