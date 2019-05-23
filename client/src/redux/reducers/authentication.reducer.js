@@ -28,7 +28,10 @@ export function authentication(state = initialState, action) {
       };
     case userConstants.LOGOUT:
       return {
-        isLogged: false
+        isLogged: false,
+        exp: null,
+        token: "",
+        error: null
       };
     default:
       return state;

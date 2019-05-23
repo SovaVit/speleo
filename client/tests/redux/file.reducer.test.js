@@ -2,6 +2,13 @@ import { allPhoto, initialState } from "../../src/redux/reducers/photo.reducer";
 import { photoConstants } from "../../src/redux/actions/photo.actions";
 
 describe("AllCavesReducer", () => {
+  it("should return the initial state", () => {
+    expect(allPhoto(undefined, {})).toEqual({
+      error: null,
+      isFetching: false,
+      items: []
+    });
+  });
   it("request", () => {
     const action = {
       type: photoConstants.PHOTO_REQUEST

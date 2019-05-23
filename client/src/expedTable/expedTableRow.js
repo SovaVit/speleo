@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { deleteExpedition } from "../redux/actions/allExped.actions";
+import { deleteExpedition } from "../Redux/actions/allExped.actions";
 import { Button } from "reactstrap";
 
 const ExpedTableRow = props => {

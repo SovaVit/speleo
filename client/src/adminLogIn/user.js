@@ -12,12 +12,9 @@ export class User extends React.Component {
           onSubmit={this.props.handleSubmit}
           validate={values => {
             const errors = {};
-            if (!values.username) {
-              errors.username = "Required";
-            }
-            if (!values.password) {
-              errors.password = "Required";
-            }
+            errors.username = (!values.username)? "Required": undefined;
+            errors.password = (!values.password)? "Required": undefined;
+            
             return errors;
           }}
           render={({

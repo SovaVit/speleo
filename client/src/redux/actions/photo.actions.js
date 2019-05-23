@@ -29,11 +29,14 @@ function createSuccess(item) {
   };
 }
 
-function errorHandler(dispatch, error) {
-  if (error.status === 401) {
-    dispatch({ type: userConstants.LOGOUT });
-  }
-  dispatch(failure(error));
+export function errorHandler(error) {
+  
+  return dispatch => {
+    if (error.status === 401) {
+      return (dispatch(failure(error)), dispatch({ type: userConstants.LOGOUT }));
+    }
+    return dispatch(failure(error));
+  };
 }
 export function getPhotos(id) {
   return dispatch => {
@@ -57,7 +60,7 @@ export function deletePhoto(id) {
         dispatch(deleteSuccess(item.photo));
       },
       error => {
-        errorHandler(dispatch, error);
+        dispatch(errorHandler(error));
       }
     );
   };
@@ -70,7 +73,7 @@ export function setPhoto(photo) {
         dispatch(createSuccess(item.photo));
       },
       error => {
-        errorHandler(dispatch, error);
+        dispatch(errorHandler(error));
       }
     );
   };

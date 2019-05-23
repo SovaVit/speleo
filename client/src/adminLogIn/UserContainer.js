@@ -3,17 +3,18 @@ import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 import { User } from "./user";
 import { bindActionCreators } from "redux";
-import { userActions } from "../redux/actions/user.actions";
+import { userActions } from "../Redux/actions/user.actions";
 
 const UserContainer = props => {
+  const {isLogged, error} =props.user;
   const handleSubmit = event => {
     props.actions.login(event.username, event.password);
   };
 
   return (
     <>
-      {props.user.isLogged === false ? (
-        <User handleSubmit={handleSubmit} Error={props.user.error} />
+      {isLogged === false ? (
+        <User handleSubmit={handleSubmit} Error={error} />
       ) : (
         <Redirect to="/admin" />
       )}

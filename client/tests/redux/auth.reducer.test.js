@@ -4,6 +4,14 @@ import { authentication } from "../../src/redux/reducers/authentication.reducer"
 const initialState = { isLogged: false, token: "", exp: null, error: null };
 
 describe("AuthReducer", () => {
+  it("should return the initial state", () => {
+    expect(authentication(undefined, {})).toEqual({
+      isLogged: false,
+      token: "",
+      exp: null,
+      error: null
+    });
+  });
   it("request", () => {
     const action = {
       type: userConstants.LOGIN_REQUEST
@@ -25,6 +33,21 @@ describe("AuthReducer", () => {
       isLogged: true,
       token: action.user.token,
       error: null
+    });
+  });
+  it("LOG_out success", () => {
+    const action = {
+      type: userConstants.LOGOUT,
+      user: { token: "token", exp: "123" }
+    };
+    expect(authentication(initialState, action)).toEqual({
+      ...initialState,
+      
+        isLogged: false,
+        exp: null,
+        token: "",
+        error: null
+      
     });
   });
   it("failure", () => {

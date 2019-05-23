@@ -1,38 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Loader from "./dropzone";
 import Gallery from "./gallery";
-import { setPhoto, getPhotos, deletePhoto } from "../../redux/actions/photo.actions";
-import * as css from './photo.module.css';
+import {
+  setPhoto,
+  getPhotos,
+  deletePhoto
+} from "../../Redux/actions/photo.actions";
+import * as css from "./photo.module.css";
 
-class PhotoGallery extends React.Component {
+const PhotoGallery = props => {
+  const { id } = props.match.params;
+  const { items } = props.photo;
+  useEffect(() => {
+    props.getPhotos(id);
+  }, []);
 
-  componentDidMount(){
-    this.props.getPhotos(this.props.match.params.id)
-  }
-  onDrop = acceptedFiles => {
+  const onDrop = acceptedFiles => {
     const data = new FormData();
     data.append("file", acceptedFiles[0]);
-    data.append("caveId", this.props.match.params.id);
-    this.props.setPhoto(data);
+    data.append("caveId", id);
+    props.setPhoto(data);
   };
-  handleDelete = id =>{
-    this.props.deletePhoto(id);
+  const handleDelete = id => {
+    props.deletePhoto(id);
   };
 
-  render() {
-    return (
-      <div className={css.container}>
-       <div className={css.alert}>
-        Фотогалерея!
-      </div>
-        <Gallery items={this.props.photo.items}
-        handleDelete={this.handleDelete}/>
-        <Loader onDrop={this.onDrop} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={css.container}>
+      <div className={css.alert}>Фотогалерея!</div>
+      <Gallery items={items} handleDelete={handleDelete} />
+      <Loader onDrop={onDrop} />
+    </div>
+  );
+};
 
 const mapStateToProps = store => {
   return {
@@ -43,7 +44,7 @@ const mapDispatchToProps = dispatch => {
   return {
     setPhoto: photo => dispatch(setPhoto(photo)),
     getPhotos: id => dispatch(getPhotos(id)),
-    deletePhoto: id=> dispatch(deletePhoto(id))
+    deletePhoto: id => dispatch(deletePhoto(id))
   };
 };
 

@@ -45,5 +45,17 @@ it(" ERROR_LOGIN", () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
-
+  it(" LOG_OUT", () => {
+  let token ="12345"
+    fetch.mockResponse(JSON.stringify( {}));
+    const expectedActions = 
+      [{
+        type: userConstants.LOGOUT,
+        
+      }];
+    const store = mockStore({});
+    return store.dispatch(userActions.logout(token)).then(()=>{
+      expect(store.getActions()).toEqual(expectedActions)
+    })
+  });
 })

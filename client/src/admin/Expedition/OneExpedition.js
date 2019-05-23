@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { FetchIfNeeded } from "../../redux/actions/oneExped.actions";
+import { FetchIfNeeded } from "../../Redux/actions/oneExped.actions";
 import { Alert } from "reactstrap";
 
 const OneExpedition = props => {
+  const { id } = props.match.params;
+  const { error, isFetching, item } = props.expedition;
   useEffect(() => {
-    const { id } = props.match.params;
     props.getOne(id);
   }, []);
 
-  const { error, isFetching, item } = props.expedition;
   return (
     <>
       {error !== null && <Alert color="danger">Помилка завантаження!</Alert>}

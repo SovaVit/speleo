@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --watch",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:8080",
@@ -46,13 +46,15 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.0",
+    "jest": "^23.6.0",
     "jest-fetch-mock": "^2.1.2",
     "prettier": "^1.16.4",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.3",
     "regenerator-runtime": "^0.13.2",
-    "ts-jest": "^24.0.2",
-    "jest": "^23.6.0"
+    "ts-jest": "^24.0.2"
   }
 }

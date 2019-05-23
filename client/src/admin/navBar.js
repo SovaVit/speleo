@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { userActions } from "../redux/actions/user.actions";
+import { userActions } from "../Redux/actions/user.actions";
 import { withRouter } from "react-router-dom";
 import {
   Collapse,

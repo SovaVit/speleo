@@ -1,8 +1,17 @@
-import { allCave, initialState} from "../../src/redux/reducers/allCave.reducer";
+import {
+  allCave,
+  initialState
+} from "../../src/redux/reducers/allCave.reducer";
 import { allCaveConstants } from "../../src/redux/actions/allCave.actions";
 
 describe("AllCavesReducer", () => {
-
+  it("should return the initial state", () => {
+    expect(allCave(undefined, {})).toEqual({
+      error: null,
+      isFetching: false,
+      items: []
+    });
+  });
   it("request", () => {
     const action = {
       type: allCaveConstants.ALL_CAVE_REQUEST
@@ -10,7 +19,7 @@ describe("AllCavesReducer", () => {
     expect(allCave(initialState, action)).toEqual({
       error: null,
       isFetching: true,
-      items:[]
+      items: []
     });
   });
   it("success", () => {

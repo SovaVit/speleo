@@ -39,8 +39,8 @@ function login(username, password) {
 }
 
 function logout(token) {
-  userService.logout(token);
   return dispatch => {
-    dispatch({ type: userConstants.LOGOUT });
+    return (userService.logout(token),
+      dispatch({ type: userConstants.LOGOUT }));
   };
 }

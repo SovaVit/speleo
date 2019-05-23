@@ -9,7 +9,7 @@ export function getOneExpedition(id) {
   return dispatch => {
     dispatch(request());
 
-   return expeditionService.getOne(id).then(
+    return expeditionService.getOne(id).then(
       item => {
         dispatch(success(item.expedition));
       },
@@ -33,9 +33,6 @@ export function FetchIfNeeded(id) {
   return (dispatch, getState) => {
     const post = getState().expeditions.items.find(item => item._id === id);
 
-    if (post) {
-      return dispatch(success(post));
-    }
-    return dispatch(getOneExpedition(id));
+    post ? dispatch(success(post)) : dispatch(getOneExpedition(id));
   };
 }

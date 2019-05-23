@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getAllExpeditions } from "../../redux/actions/allExped.actions";
+import { fetchPostsIfNeeded } from "../../Redux/actions/allExped.actions";
 import TableExpedition from "./TableExped";
 import { Row, Button } from "reactstrap";
 
 const GetAllExpeditions = props => {
-  
+  const { history, expeditions } = props;
   useEffect(() => {
     props.get();
   }, []);
@@ -17,13 +17,13 @@ const GetAllExpeditions = props => {
         <Button
           color="success"
           size="sm"
-          onClick={() => props.history.push("/admin/add-expedition")}
+          onClick={() => history.push("/admin/add-expedition")}
         >
           Create New
         </Button>
       </Row>
       <Row>
-        <TableExpedition expeditions={props.expeditions} />
+        <TableExpedition expeditions={expeditions} />
       </Row>
     </>
   );
@@ -35,7 +35,7 @@ const mapStateToProps = store => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    get: () => dispatch(getAllExpeditions())
+    get: () => dispatch(fetchPostsIfNeeded())
   };
 };
 export default withRouter(

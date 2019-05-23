@@ -5,6 +5,15 @@ import {
   import { oneExpeditionConstants } from "../../src/redux/actions/oneExped.actions";
   
   describe("OneExpeditionReducer", () => {
+    it('should return the initial state', () => {
+      expect(oneExpedition(undefined, {})).toEqual(
+        {
+          error: null, 
+          isFetching: false, 
+          item: {}
+        }
+      )
+    });
     it("request", () => {
       const action = {
         type: oneExpeditionConstants.ONE_EXPEDITIONS_REQUEST

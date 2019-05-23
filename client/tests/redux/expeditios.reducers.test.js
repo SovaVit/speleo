@@ -5,6 +5,13 @@ import {
 import { allExpeditionConstants } from "../../src/redux/actions/allExped.actions";
 
 describe("AllExpeditionReducer", () => {
+  it("should return the initial state", () => {
+    expect(allExpedition(undefined, {})).toEqual({
+      error: null,
+      isFetching: false,
+      items: []
+    });
+  });
   it("request", () => {
     const action = {
       type: allExpeditionConstants.ALL_EXPEDITIONS_REQUEST

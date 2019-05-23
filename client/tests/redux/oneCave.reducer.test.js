@@ -5,6 +5,15 @@ import {
   import { oneCaveConstants } from "../../src/redux/actions/oneCave.actions";
   
   describe("OneCaveReducer", () => {
+    it('should return the initial state', () => {
+      expect(oneCave(undefined, {})).toEqual(
+        {
+          error: null, 
+          isFetching: false, 
+          item: {}
+        }
+      )
+    });
     it("request", () => {
       const action = {
         type: oneCaveConstants.ONE_CAVE_REQUEST

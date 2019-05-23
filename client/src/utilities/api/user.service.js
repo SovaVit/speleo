@@ -1,13 +1,13 @@
 import authHeader from "../helpers/auth-header";
 import handleResponse from "../helpers/handleResponse";
 
-const config = {
-  apiUrl: "http://localhost:8080/"
-};
+// const config = {
+//   apiUrl: "http://localhost:8080/"
+// };
 export const userService = {
   login,
   logout,
-  update
+ // update
 };
 
 async function login(username, password) {
@@ -33,16 +33,16 @@ async function logout(token) {
   return user;
 }
 
-async function update(user) {
-  const requestOptions = {
-    method: "PUT",
-    headers: { ...authHeader(), "Content-Type": "application/json" },
-    body: JSON.stringify(user)
-  };
+// async function update(user) {
+//   const requestOptions = {
+//     method: "PUT",
+//     headers: { ...authHeader(), "Content-Type": "application/json" },
+//     body: JSON.stringify(user)
+//   };
 
-  const response = await fetch(
-    `${config.apiUrl}/users/${user.id}`,
-    requestOptions
-  );
-  return handleResponse(response);
-}
+//   const response = await fetch(
+//     `${config.apiUrl}/users/${user.id}`,
+//     requestOptions
+//   );
+//   return handleResponse(response);
+// }

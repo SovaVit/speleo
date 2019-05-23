@@ -1,5 +1,12 @@
-import { getAllExpeditions, deleteExpedition, setExpedition, updateExpedition } from "../../src/redux/actions/allExped.actions";
+import {
+  getAllExpeditions,
+  deleteExpedition,
+  setExpedition,
+  updateExpedition,
+  errorHandler
+} from "../../src/redux/actions/allExped.actions";
 import { allExpeditionConstants } from "../../src/redux/actions/allExped.actions";
+import { userConstants } from "../../src/Redux/actions/user.actions";
 import configureMockStore from "redux-mock-store";
 
 import thunk from "redux-thunk";
@@ -31,7 +38,7 @@ describe("expeditions actions", () => {
     it(" ERROR_ALL when fetching", () => {
       const e = new Error("Unauthorized");
       e.name = "Unauthorized";
-      fetch.mockReject({statusText: e.name, status: 401});
+      fetch.mockReject({ statusText: e.name, status: 401 });
 
       const expectedActions = [
         {
@@ -39,7 +46,7 @@ describe("expeditions actions", () => {
         },
         {
           type: allExpeditionConstants.ALL_EXPEDITIONS_FAILURE,
-          error: {statusText:"Unauthorized", status: 401},
+          error: { statusText: "Unauthorized", status: 401 }
         }
       ];
       const store = mockStore({});
@@ -47,44 +54,78 @@ describe("expeditions actions", () => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
-it("delete expedition",()=>{
-  const _id =1; 
-  fetch.mockResponse(JSON.stringify({ expedition: {_id: 1} }));
-  const expectedActions = 
-    [{
-      type: allExpeditionConstants.DELETE_EXPEDITIONS_SUCCESS,
-      item: {_id: 1}
-    }];
-    const store = mockStore({user:{token: "12345"}});
-    return store.dispatch(deleteExpedition(_id)).then(()=>{
-      expect(store.getActions()).toEqual(expectedActions)
-    })
-});
-it("create expedition",()=>{
-  const expedition ={_id: 1}; 
-  fetch.mockResponse(JSON.stringify({ expedition: {_id: 1} }));
-  const expectedActions = 
-    [{
-      type: allExpeditionConstants.CREATE_EXPEDITIONS_SUCCESS,
-      item: {_id: 1}
-    }];
-    const store = mockStore({user:{token: "12345"}});
-    return store.dispatch(setExpedition(expedition)).then(()=>{
-      expect(store.getActions()).toEqual(expectedActions)
-    })
-});
-it("update expedition",()=>{
-  const expedition ={_id: 1}; 
-  fetch.mockResponse(JSON.stringify({ expedition: {_id: 1} }));
-  const expectedActions = 
-    [{
-      type: allExpeditionConstants.UPDATE_EXPEDITIONS_SUCCESS,
-      item: {_id: 1}
-    }];
-    const store = mockStore({user:{token: "12345"}});
-    return store.dispatch(updateExpedition(expedition._id, expedition)).then(()=>{
-      expect(store.getActions()).toEqual(expectedActions)
-    })
-});
+    it("delete expedition", () => {
+      const _id = 1;
+      fetch.mockResponse(JSON.stringify({ expedition: { _id: 1 } }));
+      const expectedActions = [
+        {
+          type: allExpeditionConstants.DELETE_EXPEDITIONS_SUCCESS,
+          item: { _id: 1 }
+        }
+      ];
+      const store = mockStore({ user: { token: "12345" } });
+      return store.dispatch(deleteExpedition(_id)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+    it("create expedition", () => {
+      const expedition = { _id: 1 };
+      fetch.mockResponse(JSON.stringify({ expedition: { _id: 1 } }));
+      const expectedActions = [
+        {
+          type: allExpeditionConstants.CREATE_EXPEDITIONS_SUCCESS,
+          item: { _id: 1 }
+        }
+      ];
+      const store = mockStore({ user: { token: "12345" } });
+      return store.dispatch(setExpedition(expedition)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+    it("update expedition", () => {
+      const expedition = { _id: 1 };
+      fetch.mockResponse(JSON.stringify({ expedition: { _id: 1 } }));
+      const expectedActions = [
+        {
+          type: allExpeditionConstants.UPDATE_EXPEDITIONS_SUCCESS,
+          item: { _id: 1 }
+        }
+      ];
+      const store = mockStore({ user: { token: "12345" } });
+      return store
+        .dispatch(updateExpedition(expedition._id, expedition))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
+    });
+    it("handleError", () => {
+      const e = { status: 401, statusText: "Unauthorized" };
+      fetch.mockReject({ statusText: e.statusText, status: 401 });
+      const expectedActions = [
+        {
+          type: allExpeditionConstants.ALL_EXPEDITIONS_FAILURE,
+          error: { statusText: "Unauthorized", status: 401 }
+        },
+        {
+          type: userConstants.LOGOUT
+        }
+      ];
+      const store = mockStore({});
+      store.dispatch(errorHandler(e));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+    it("handleError 2", () => {
+      const e = { status: 400, statusText: "Bad Request" };
+      fetch.mockReject({ statusText: "Bad Request", status: 400 });
+      const expectedActions = [
+        {
+          type: allExpeditionConstants.ALL_EXPEDITIONS_FAILURE,
+          error: { statusText: "Bad Request", status: 400 }
+        }
+      ];
+      const store = mockStore({});
+      store.dispatch(errorHandler(e));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 });

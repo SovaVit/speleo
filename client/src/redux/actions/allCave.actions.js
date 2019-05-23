@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import { caveService } from "../../utilities/api/cave.service";
 import { userConstants } from "./user.actions";
 export const allCaveConstants = {
@@ -9,7 +10,7 @@ export const allCaveConstants = {
   UPDATE_CAVE_SUCCESS: "UPDATE_CAVE_SUCCESS"
 };
 
-function getAllCaves() {
+export function getAllCaves() {
   return dispatch => {
     dispatch(request());
 
@@ -31,7 +32,7 @@ export function deleteCave(id) {
         dispatch(deleteSuccess(item.cave));
       },
       error => {
-        errorHandler(dispatch, error);
+       dispatch(errorHandler(error));
       }
     );
   };
@@ -44,7 +45,7 @@ export function setCave(cave) {
         dispatch(createSuccess(item.cave));
       },
       error => {
-        errorHandler(dispatch, error);
+       dispatch(errorHandler(error));
       }
     );
   };
@@ -58,7 +59,7 @@ export function updateCave(id, cave) {
         dispatch(updateSuccess(item.cave));
       },
       error => {
-        errorHandler(dispatch, error);
+        dispatch(errorHandler(error));
       }
     );
   };
@@ -88,16 +89,18 @@ function updateSuccess(item) {
     item
   };
 }
-function errorHandler(dispatch, error) {
-  if (error.status === 401) {
-    dispatch({ type: userConstants.LOGOUT });
-  }
-  dispatch(failure(error));
+export function errorHandler(error) {
+  return dispatch => {
+   if (error.status === 401){
+     return (dispatch(failure(error)), 
+    dispatch({ type: userConstants.LOGOUT }))} 
+   return dispatch(failure(error));
+  };
 }
 function shouldFetchPosts(state) {
   const { items, isFetching } = state.caves;
-  if (items < 150) {
-    return true;
+  if (items.length === 136) {
+    return false;
   } else if (isFetching) {
     return false;
   } else {
@@ -107,11 +110,6 @@ function shouldFetchPosts(state) {
 
 export function fetchPostsIfNeeded() {
   return (dispatch, getState) => {
-    if (shouldFetchPosts(getState())) {
-      return dispatch(getAllCaves());
-    } else {
-      // Let the calling code know there's nothing to wait for.
-      return Promise.resolve();
-    }
+    shouldFetchPosts(getState()) ? dispatch(getAllCaves()) : Promise.resolve();
   };
 }

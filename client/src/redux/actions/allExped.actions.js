@@ -31,7 +31,7 @@ export function deleteExpedition(id) {
         dispatch(deleteSuccess(item.expedition));
       },
       error => {
-        errorHandler(dispatch, error);
+        dispatch(errorHandler(error));
       }
     );
   };
@@ -44,7 +44,7 @@ export function setExpedition(expedition) {
         dispatch(createSuccess(item.expedition));
       },
       error => {
-        errorHandler(dispatch, error);
+       dispatch(errorHandler(error));
       }
     );
   };
@@ -58,7 +58,7 @@ export function updateExpedition(id, expedition) {
         dispatch(updateSuccess(item.expedition));
       },
       error => {
-        errorHandler(dispatch, error);
+       dispatch(errorHandler(error));
       }
     );
   };
@@ -87,9 +87,27 @@ function updateSuccess(item) {
     item
   };
 }
-function errorHandler(dispatch, error) {
-  if (error.status === 401) {
-    dispatch({ type: userConstants.LOGOUT });
+export function errorHandler(error) {
+  return dispatch => {
+    if (error.status === 401) {
+      return (dispatch(failure(error)), dispatch({ type: userConstants.LOGOUT }));
+    }
+    return dispatch(failure(error));
+  };
+};
+function shouldFetchPosts(state) {
+  const { items, isFetching } = state.expeditions;
+  if (items.length === 136) {
+    return false;
+  } else if (isFetching) {
+    return false;
+  } else {
+    return true;
   }
-  dispatch(failure(error));
+}
+
+export function fetchPostsIfNeeded() {
+  return (dispatch, getState) => {
+    shouldFetchPosts(getState()) ? dispatch(getAllExpeditions()) : Promise.resolve();
+  };
 }
