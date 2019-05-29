@@ -6,16 +6,16 @@ import AddCaveForm from "./AddCaveForm";
 import { setCave } from "../../Redux/actions/allCave.actions";
 import { Alert, Row, Col, Button } from "reactstrap";
 
-const AddCave = (props) => {
+const AddCave = props => {
   const { history, error } = props;
   let [editorHtml, setEditorHtml] = useState("");
 
   const handleChange = html => {
     setEditorHtml(html);
   };
-  const handleSubmit = (event, form) => {
+  const handleSubmit = async (event, form) => {
     event.description = editorHtml;
-    props.create(event);
+    await props.create(event);
     setEditorHtml("");
     form.reset();
     history.push("/admin/cave");

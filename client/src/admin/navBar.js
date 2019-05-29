@@ -1,12 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { userActions } from "../Redux/actions/user.actions";
-import { withRouter } from "react-router-dom";
+import { NavLink as RRNavLink, withRouter } from "react-router-dom";
 import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -35,15 +34,29 @@ class NavMenu extends React.Component {
   render() {
     return (
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Home</NavbarBrand>
+        <NavLink to="/" tag={RRNavLink}>
+          Home
+        </NavLink>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/admin/cave">Печери</NavLink>
+              <NavLink
+                to="/admin/cave"
+                tag={RRNavLink}
+                activeClassName="active"
+              >
+                Печери
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/admin/expedition">Експедиції</NavLink>
+              <NavLink
+                to="/admin/expedition"
+                tag={RRNavLink}
+                activeClassName="active"
+              >
+                Експедиції
+              </NavLink>
             </NavItem>
 
             <NavItem>

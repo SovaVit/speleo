@@ -9,8 +9,11 @@ const list = ({ Expedition }, { config }) => async (req, res, next) => {
       _.extend(query, { caveId: `${caveId}` });
     }
     const expedition = await Expedition.find(query).sort({ _id: -1 });
-
-    res.status(200).send({ expedition }).end();
+    
+    res
+      .status(200)
+      .json({ expedition })
+      .end();
   } catch (error) {
     next(error);
   }

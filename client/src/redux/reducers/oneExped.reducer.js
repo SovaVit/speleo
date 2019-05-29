@@ -7,11 +7,10 @@ export function oneExpedition(state = initialState, action) {
     case oneExpeditionConstants.ONE_EXPEDITIONS_REQUEST:
       return { ...state, isFetching: true };
     case oneExpeditionConstants.ONE_EXPEDITIONS_SUCCESS:
-      return { ...state, isFetching: false, item: action.item };
+      return { ...state, item: action.item };
     case oneExpeditionConstants.ONE_EXPEDITIONS_FAILURE:
       return {
         ...state,
-        isFetching: false,
         status: action.error.status,
         error: action.error.statusText
       };

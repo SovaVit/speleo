@@ -16,7 +16,7 @@ const remove = ({ Photo }, { config }) => async (req, res, next) => {
 
     res
       .status(200)
-      .send({ photo })
+      .json({ photo })
       .end();
   } catch (error) {
     next(error);

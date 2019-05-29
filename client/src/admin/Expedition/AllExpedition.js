@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { fetchPostsIfNeeded } from "../../Redux/actions/allExped.actions";
+import {fetchPostsIfNeeded } from "../../Redux/actions/allExped.actions";
 import TableExpedition from "./TableExped";
 import { Row, Button } from "reactstrap";
 
 const GetAllExpeditions = props => {
   const { history, expeditions } = props;
   useEffect(() => {
+   
     props.get();
   }, []);
 

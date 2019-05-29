@@ -5,6 +5,7 @@ const { errorHandler } = require("../middleware");
 const { Cave } = require("../models/Cave");
 const { Expedition } = require("../models/Expedition");
 const {Photo} = require("../models/Photo");
+const {User} = require("../models/User")
 
 // list of controllers here
 const cave = require("../controllers/Cave");
@@ -12,7 +13,7 @@ const expedition = require("../controllers/Expedition");
 const photo = require("../controllers/Photo");
 const auth = require("../controllers/auth");
 // combine models in one object
-const models = { Cave, Expedition, Photo };
+const models = { Cave, Expedition, Photo, User };
 
 const routersInit = config => {
   const router = express();

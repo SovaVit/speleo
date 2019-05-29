@@ -12,7 +12,6 @@ export const allExpeditionConstants = {
 export function getAllExpeditions() {
   return dispatch => {
     dispatch(request());
-
     return expeditionService.getAll().then(
       items => {
         dispatch(allSuccess(items.expedition));
@@ -108,6 +107,7 @@ function shouldFetchPosts(state) {
 
 export function fetchPostsIfNeeded() {
   return (dispatch, getState) => {
+   
     shouldFetchPosts(getState()) ? dispatch(getAllExpeditions()) : Promise.resolve();
   };
 }

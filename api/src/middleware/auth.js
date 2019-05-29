@@ -8,11 +8,13 @@ const authenticate = expressJwt({
 });
 
 const generateAccessToken = (req, res, next) => {
+
+
   req.exp = Date.now() + config.tokenTime * 1000;
   req.token = req.token || {};
   req.token = jwt.sign(
     {
-      id: req.username
+      id: req.user._id
     },
     config.SECRET_TOKEN,
     {

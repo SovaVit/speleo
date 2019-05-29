@@ -40,7 +40,6 @@ function login(username, password) {
 
 function logout(token) {
   return dispatch => {
-    return (userService.logout(token),
-      dispatch({ type: userConstants.LOGOUT }));
+    return dispatch({ type: userConstants.LOGOUT });
   };
 }

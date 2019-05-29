@@ -12,7 +12,7 @@ const NavBar = props => {
           </NavLink>
         </li>
         <li className={styles.list__item}>
-          <NavLink to="/">
+          <NavLink to="/ozerna">
             <span>Печера Озерна</span>
           </NavLink>
         </li>

@@ -8,7 +8,7 @@ const get = ({ Expedition }, { config }) => async (req, res, next) => {
     }
     res
       .status(200)
-      .send({ expedition })
+      .json({ expedition })
       .end();
   } catch (error) {
     next(error);

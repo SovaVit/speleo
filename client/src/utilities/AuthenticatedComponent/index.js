@@ -4,12 +4,18 @@ import { Redirect } from "react-router";
 
 export default function requireAuth(Component) {
   class PrivateRoute extends React.Component {
-    
+    Timer = () => {
+      const { exp } = this.props.user;
+      const expirationTime = (exp - Date.now()) / 1000;
+
+      return expirationTime <= 0 ? false : true;
+    };
+
     render() {
-      console.log("auth left out",(this.props.user.exp-Date.now())/1000)
+      const { isLogged } = this.props.user;
       return (
-        <div>
-          {this.props.user.isLogged === true ? (
+        <>
+          {isLogged === true && this.Timer() === true ? (
             <Component {...this.props} />
           ) : (
             <Redirect
@@ -19,7 +25,7 @@ export default function requireAuth(Component) {
               }}
             />
           )}
-        </div>
+        </>
       );
     }
   }

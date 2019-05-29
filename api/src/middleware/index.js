@@ -1,6 +1,6 @@
 const { errorHandler } = require("./error-handler");
 const { authenticate, generateAccessToken } = require("./auth");
-const { localUser } = require("./local");
+
 const {
   sendOne,
   sendList,
@@ -10,7 +10,7 @@ const {
   sendAccepted
 } = require("./requests-helpers");
 const { upload } = require("./multer");
-
+const { localAuth } = require("./localAuth");
 module.exports = {
   errorHandler,
   authenticate,
@@ -22,5 +22,5 @@ module.exports = {
   sendDeleted,
   sendAccepted,
   upload,
-  localUser
+  localAuth
 };

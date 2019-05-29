@@ -16,11 +16,11 @@ const PhotoGallery = props => {
     props.getPhotos(id);
   }, []);
 
-  const onDrop = acceptedFiles => {
+  const onDrop = async acceptedFiles => {
     const data = new FormData();
     data.append("file", acceptedFiles[0]);
     data.append("caveId", id);
-    props.setPhoto(data);
+    await props.setPhoto(data);
   };
   const handleDelete = id => {
     props.deletePhoto(id);

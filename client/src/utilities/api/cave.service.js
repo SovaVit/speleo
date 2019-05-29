@@ -27,7 +27,6 @@ async function getOne(id) {
   return item;
 }
 async function create(cave, token) {
-  
   const requestOptions = {
     method: "POST",
     headers: authHeader(token),
@@ -39,7 +38,6 @@ async function create(cave, token) {
   return items;
 }
 async function update(id, cave, token) {
- 
   const requestOptions = {
     method: "PATCH",
     headers: authHeader(token),

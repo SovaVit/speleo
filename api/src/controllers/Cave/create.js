@@ -12,7 +12,10 @@ const create = ({ Cave }, { config }) => async (req, res, next) => {
 
     await cave.save();
 
-    return res.status(200).send({ cave }).end();
+    return res
+      .status(200)
+      .json({ cave })
+      .end();
   } catch (error) {
     next(error);
   }

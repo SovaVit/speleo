@@ -1,24 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { User } from "./user";
 import { bindActionCreators } from "redux";
 import { userActions } from "../Redux/actions/user.actions";
 
 const UserContainer = props => {
-  const {isLogged, error} =props.user;
-  const handleSubmit = event => {
-    props.actions.login(event.username, event.password);
+  const { error } = props.user;
+  const handleSubmit = async event => {
+    await props.actions.login(event.username, event.password);
+   return props.history.push("/admin/cave");
   };
 
   return (
-    <>
-      {isLogged === false ? (
-        <User handleSubmit={handleSubmit} Error={error} />
-      ) : (
-        <Redirect to="/admin" />
-      )}
-    </>
+    
+      <User handleSubmit={handleSubmit} Error={error} />
+  
   );
 };
 const mapStateToProps = store => {

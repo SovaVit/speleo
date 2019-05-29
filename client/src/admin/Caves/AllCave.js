@@ -6,11 +6,11 @@ import TableCave from "./TableCave";
 import { Row, Button } from "reactstrap";
 
 const GetAllCaves = props => {
-  const { history, caves } = props;
   useEffect(() => {
     props.get();
   }, []);
 
+  const { history, caves } = props;
   return (
     <>
       <Row className="p-1 ml-1">

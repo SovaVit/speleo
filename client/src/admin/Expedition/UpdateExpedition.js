@@ -22,9 +22,9 @@ const UpdateExpedition = props => {
     setEditorHtml(html);
   };
 
-  const handleSubmit = (event, form) => {
+  const handleSubmit = async (event, form) => {
     event.description = editorHtml;
-    props.update(id, event);
+    await props.update(id, event);
     setEditorHtml("");
     form.reset();
     history.push("/admin/expedition");

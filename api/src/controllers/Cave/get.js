@@ -8,7 +8,7 @@ const get = ({ Cave }, { config }) => async (req, res, next) => {
     }
     res
       .status(200)
-      .send({ cave })
+      .json({ cave })
       .end();
   } catch (error) {
     next(error);

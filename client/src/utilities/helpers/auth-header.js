@@ -4,11 +4,13 @@ const authHeader = token => {
   if (token) {
     myHeader = new Headers({
       "Content-type": "application/json; charset=UTF-8",
+      Accept: "application/json",
       Authorization: `Bearer ${token}`
     });
   } else {
     myHeader = new Headers({
-      "Content-type": "application/json; charset=UTF-8"
+      "Content-type": "application/json; charset=UTF-8",
+      Accept: "application/json"
     });
   }
   return myHeader;

@@ -12,7 +12,10 @@ const create = ({ Expedition }, { config }) => async (req, res, next) => {
 
     await expedition.save();
 
-    return res.status(200).send({ expedition }).end();
+    return res
+      .status(200)
+      .json({ expedition })
+      .end();
   } catch (error) {
     next(error);
   }

@@ -1,13 +1,8 @@
 import authHeader from "../helpers/auth-header";
 import handleResponse from "../helpers/handleResponse";
 
-// const config = {
-//   apiUrl: "http://localhost:8080/"
-// };
 export const userService = {
-  login,
-  logout,
- // update
+  login
 };
 
 async function login(username, password) {
@@ -23,15 +18,15 @@ async function login(username, password) {
   return user;
 }
 
-async function logout(token) {
-  const requestOptions = {
-    method: "POST",
-    headers: authHeader(token)
-  };
-  const response = await fetch(`/speleo/user/sign-out`, requestOptions);
-  const user = await handleResponse(response);
-  return user;
-}
+// async function logout(token) {
+//   const requestOptions = {
+//     method: "POST",
+//     headers: authHeader(token)
+//   };
+//   const response = await fetch(`/speleo/user/sign-out`, requestOptions);
+//   const user = await handleResponse(response);
+//   return user;
+// }
 
 // async function update(user) {
 //   const requestOptions = {
