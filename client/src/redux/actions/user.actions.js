@@ -38,7 +38,7 @@ function login(username, password) {
   }
 }
 
-function logout(token) {
+function logout() {
   return dispatch => {
     return dispatch({ type: userConstants.LOGOUT });
   };

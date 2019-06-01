@@ -8,11 +8,11 @@ export const expeditionService = {
     update,
     deleteExpedition
   };
-  async function getAll() {
+  async function getAll(start) {
     const requestOptions = {
       method: "GET"
     };
-    const response = await fetch(`/speleo/expedition`, requestOptions);
+    const response = await fetch(`/speleo/expedition/?skip=${start}`, requestOptions);
     const items = await handleResponse(response);
   
     return items;

@@ -6,9 +6,8 @@ export function allPhoto(state = initialState, action) {
   switch (action.type) {
     case photoConstants.PHOTO_REQUEST:
       return {
-        isFetching: true,
-        items: [],
-        error: null
+        ...state,
+        isFetching: true
       };
     case photoConstants.PHOTO_SUCCESS:
       return {

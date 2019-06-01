@@ -10,13 +10,13 @@ export const allCaveConstants = {
   UPDATE_CAVE_SUCCESS: "UPDATE_CAVE_SUCCESS"
 };
 
-export function getAllCaves() {
+export function getAllCaves(start) {
   return dispatch => {
     dispatch(request());
 
-    return caveService.getAll().then(
+    return caveService.getAll(start).then(
       items => {
-        dispatch(allSuccess(items.cave));
+        dispatch(allSuccess(items.cave, items.countRecords));
       },
       error => {
         dispatch(failure(error));
@@ -32,7 +32,7 @@ export function deleteCave(id) {
         dispatch(deleteSuccess(item.cave));
       },
       error => {
-       dispatch(errorHandler(error));
+        dispatch(errorHandler(error));
       }
     );
   };
@@ -45,7 +45,7 @@ export function setCave(cave) {
         dispatch(createSuccess(item.cave));
       },
       error => {
-       dispatch(errorHandler(error));
+        dispatch(errorHandler(error));
       }
     );
   };
@@ -67,8 +67,8 @@ export function updateCave(id, cave) {
 function request() {
   return { type: allCaveConstants.ALL_CAVE_REQUEST };
 }
-function allSuccess(items) {
-  return { type: allCaveConstants.ALL_CAVE_SUCCESS, items };
+function allSuccess(items, countRecords) {
+  return { type: allCaveConstants.ALL_CAVE_SUCCESS, items, countRecords };
 }
 function failure(error) {
   return { type: allCaveConstants.ALL_CAVE_FAILURE, error };
@@ -91,25 +91,22 @@ function updateSuccess(item) {
 }
 export function errorHandler(error) {
   return dispatch => {
-   if (error.status === 401){
-     return (dispatch(failure(error)), 
-    dispatch({ type: userConstants.LOGOUT }))} 
-   return dispatch(failure(error));
+    if (error.status === 401) {
+      return( dispatch(failure(error)), dispatch({ type: userConstants.LOGOUT }));
+    }
+    return dispatch(failure(error));
   };
 }
 function shouldFetchPosts(state) {
-  const { items, isFetching } = state.caves;
-  if (items.length === 136) {
-    return false;
-  } else if (isFetching) {
-    return false;
-  } else {
-    return true;
-  }
+  const { isFetching } = state.caves;
+  const result = isFetching ? false : true;
+  return result;
 }
 
-export function fetchPostsIfNeeded() {
+export function fetchPostsIfNeeded(start) {
   return (dispatch, getState) => {
-    shouldFetchPosts(getState()) ? dispatch(getAllCaves()) : Promise.resolve();
+    shouldFetchPosts(getState())
+      ? dispatch(getAllCaves(start))
+      : Promise.resolve();
   };
 }

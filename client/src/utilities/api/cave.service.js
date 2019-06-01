@@ -8,11 +8,11 @@ export const caveService = {
   update,
   deleteCave
 };
-async function getAll() {
+async function getAll(start) {
   const requestOptions = {
     method: "GET"
   };
-  const response = await fetch(`/speleo/cave`, requestOptions);
+  const response = await fetch(`/speleo/cave/?skip=${start}`, requestOptions);
   const items = await handleResponse(response);
 
   return items;

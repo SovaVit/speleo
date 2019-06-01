@@ -11,10 +11,10 @@ class Routes extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={Home} />
         <Route exact path="/ozerna" component={Ozerna} />
         <Route path="/admin" component={requireAuth(Admin)} />
-        <Route path="/login" component={UserContainer} />
+        <Route exact path="/login" component={UserContainer} />
+        <Route exact path="/" component={Home} />
         <Route path="*" component={NotFound} />
       </Switch>
     );

@@ -9,12 +9,12 @@ export const allExpeditionConstants = {
   UPDATE_EXPEDITIONS_SUCCESS: "UPDATE_EXPEDITIONS_SUCCESS"
 };
 
-export function getAllExpeditions() {
+export function getAllExpeditions(start) {
   return dispatch => {
     dispatch(request());
-    return expeditionService.getAll().then(
+    return expeditionService.getAll(start).then(
       items => {
-        dispatch(allSuccess(items.expedition));
+        dispatch(allSuccess(items.expedition,items.countRecords));
       },
       error => {
         dispatch(failure(error));
@@ -65,8 +65,8 @@ export function updateExpedition(id, expedition) {
 function request() {
   return { type: allExpeditionConstants.ALL_EXPEDITIONS_REQUEST };
 }
-function allSuccess(items) {
-  return { type: allExpeditionConstants.ALL_EXPEDITIONS_SUCCESS, items };
+function allSuccess(items, countRecords) {
+  return { type: allExpeditionConstants.ALL_EXPEDITIONS_SUCCESS, items, countRecords };
 }
 function failure(error) {
   return { type: allExpeditionConstants.ALL_EXPEDITIONS_FAILURE, error };
@@ -95,19 +95,13 @@ export function errorHandler(error) {
   };
 };
 function shouldFetchPosts(state) {
-  const { items, isFetching } = state.expeditions;
-  if (items.length === 136) {
-    return false;
-  } else if (isFetching) {
-    return false;
-  } else {
-    return true;
-  }
+  const { isFetching } = state.expeditions;
+const result = isFetching ? false : true ;
+return result;
 }
 
-export function fetchPostsIfNeeded() {
+export function fetchPostsIfNeeded(start) {
   return (dispatch, getState) => {
-   
-    shouldFetchPosts(getState()) ? dispatch(getAllExpeditions()) : Promise.resolve();
+       shouldFetchPosts(getState()) ? dispatch(getAllExpeditions(start)) : Promise.resolve();
   };
 }

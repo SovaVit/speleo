@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { User } from "./user";
@@ -7,16 +7,15 @@ import { userActions } from "../Redux/actions/user.actions";
 
 const UserContainer = props => {
   const { error } = props.user;
+  useEffect(() => {
+    props.actions.logout();
+  }, []);
   const handleSubmit = async event => {
     await props.actions.login(event.username, event.password);
-   return props.history.push("/admin/cave");
+    return props.history.push("/admin/cave");
   };
 
-  return (
-    
-      <User handleSubmit={handleSubmit} Error={error} />
-  
-  );
+  return <User handleSubmit={handleSubmit} Error={error} />;
 };
 const mapStateToProps = store => {
   return {

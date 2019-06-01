@@ -1,48 +1,57 @@
-
 import { allExpeditionConstants } from "../actions/allExped.actions";
 
-
-
-export const initialState = { isFetching: false, items: [], error: null };
+export const initialState = {
+  isFetching: false,
+  items: [],
+  countRecords: null,
+  error: null
+};
 
 export function allExpedition(state = initialState, action) {
   switch (action.type) {
     case allExpeditionConstants.ALL_EXPEDITIONS_REQUEST:
       return {
-        isFetching: true,
-        items: [],
-        error: null
+        ...state,
+        isFetching: true
       };
     case allExpeditionConstants.ALL_EXPEDITIONS_SUCCESS:
       return {
+        ...state,
         isFetching: false,
         items: action.items,
+        countRecords: action.countRecords,
         error: null
       };
-      case allExpeditionConstants.DELETE_EXPEDITIONS_SUCCESS:
-      const newState = state.items.filter(item => {return item._id !== action.item._id});
+    case allExpeditionConstants.DELETE_EXPEDITIONS_SUCCESS:
+      const newState = state.items.filter(item => {
+        return item._id !== action.item._id;
+      });
+      const CountRecordsMinus = state.countRecords - 1;
       return {
-        isFetching: false,
+        ...state,
         items: newState,
-        error: null
-      }
-      case allExpeditionConstants.CREATE_EXPEDITIONS_SUCCESS:
+        countRecords: CountRecordsMinus
+      };
+    case allExpeditionConstants.CREATE_EXPEDITIONS_SUCCESS:
+      const CountRecordsPlus = state.countRecords + 1;
       return {
-        isFetching: false,
+        ...state,
         items: [...state.items, action.item],
-        error: null
-      }
-      case allExpeditionConstants.UPDATE_EXPEDITIONS_SUCCESS:
-      const State = state.items.filter(item => {return item._id !== action.item._id});
+        countRecords: CountRecordsPlus
+      };
+    case allExpeditionConstants.UPDATE_EXPEDITIONS_SUCCESS:
+      const State = state.items.filter(item => {
+        return item._id !== action.item._id;
+      });
       return {
-        isFetching: false,
-        items: [...State, action.item],
-        error: null
-      }
+        ...state,
+        items: [...State, action.item]
+      };
     case allExpeditionConstants.ALL_EXPEDITIONS_FAILURE:
       return {
         isFetching: false,
         items: [],
+        countRecords: null,
         status: action.error.status,
         error: action.error.statusText
       };
