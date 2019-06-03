@@ -1,26 +1,23 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { FetchIfNeeded } from "../../Redux/actions/oneExped.actions";
+import { FetchIfNeeded } from "../Redux/actions/oneExped.actions";
+import OneExpedition from "./OneExpedition";
+import NavBar from "../NavBar/Nav";
 import { Alert } from "reactstrap";
 
-const OneExpedition = props => {
+const OneExpeditionContainer = props => {
   const { id } = props.match.params;
   const { error, isFetching, item } = props.expedition;
   useEffect(() => {
     props.getOne(id);
-  }, [id]);
+  }, []);
 
   return (
     <>
+      <NavBar />
       {error !== null && <Alert color="danger">Помилка завантаження!</Alert>}
       {isFetching === true && <Alert>Завантаження!</Alert>}
-      <>
-        <div>{item.caveName}</div>
-        <div>{item.dateExpedition}</div>
-        <div dangerouslySetInnerHTML={{ __html: item.description }} />
-
-        <div>{item.numberExpedition}</div>
-      </>
+      <OneExpedition item={item} />
     </>
   );
 };
@@ -37,4 +34,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(OneExpedition);
+)(OneExpeditionContainer);

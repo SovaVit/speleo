@@ -12,18 +12,18 @@ const NavBar = props => {
           </NavLink>
         </li>
         <li className={styles.list__item}>
-          <NavLink to="/ozerna">
-            <span>Печера Озерна</span>
+          <NavLink to="/cave">
+            <span>Печери</span>
           </NavLink>
         </li>
         <li className={styles.list__item}>
-          <NavLink to="/">
-            <span>Про нас </span>
-          </NavLink>
-        </li>
-        <li className={styles.list__item}>
-          <NavLink to="/">
+          <NavLink to="/expedition">
             <span>Експедиції </span>
+          </NavLink>
+        </li>
+        <li className={styles.list__item}>
+          <NavLink to="/aboutus">
+            <span>Про нас </span>
           </NavLink>
         </li>
       </ul>

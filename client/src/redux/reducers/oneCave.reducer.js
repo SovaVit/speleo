@@ -7,7 +7,7 @@ export function oneCave(state = initialState, action) {
     case oneCaveConstants.ONE_CAVE_REQUEST:
       return { ...state, isFetching: true };
     case oneCaveConstants.ONE_CAVE_SUCCESS:
-      return { ...state, item: action.item };
+      return { ...state, isFetching:false, item: action.item };
     case oneCaveConstants.ONE_CAVE_FAILURE:
       return {
         ...state,

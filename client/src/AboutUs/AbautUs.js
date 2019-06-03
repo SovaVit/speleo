@@ -1,12 +1,12 @@
 import React from "react";
 import NavBar from "../NavBar/Nav";
 
-const Ozerna = () => {
+const AboutUs = () => {
   return (
     <div>
       <NavBar />
-      Ozerna!!!!!{" "}
+      About Us
     </div>
   );
 };
-export default Ozerna;
+export default AboutUs;
