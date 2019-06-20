@@ -9,12 +9,12 @@ export const allExpeditionConstants = {
   UPDATE_EXPEDITIONS_SUCCESS: "UPDATE_EXPEDITIONS_SUCCESS"
 };
 
-export function getAllExpeditions(start) {
+export function getAllExpeditions(start, name) {
   return dispatch => {
     dispatch(request());
-    return expeditionService.getAll(start).then(
+    return expeditionService.getAll(start, name).then(
       items => {
-        dispatch(allSuccess(items.expedition,items.countRecords));
+        dispatch(allSuccess(items.expedition, items.countRecords));
       },
       error => {
         dispatch(failure(error));
@@ -27,7 +27,7 @@ export function deleteExpedition(id) {
     const token = getState().user.token;
     return expeditionService.deleteExpedition(id, token).then(
       item => {
-        dispatch(deleteSuccess(item.expedition));
+        dispatch(deleteSuccess(item.expedition, item.countRecords));
       },
       error => {
         dispatch(errorHandler(error));
@@ -40,10 +40,10 @@ export function setExpedition(expedition) {
     const token = getState().user.token;
     return expeditionService.create(expedition, token).then(
       item => {
-        dispatch(createSuccess(item.expedition));
+        dispatch(createSuccess(item.expedition, item.countRecords));
       },
       error => {
-       dispatch(errorHandler(error));
+        dispatch(errorHandler(error));
       }
     );
   };
@@ -54,10 +54,10 @@ export function updateExpedition(id, expedition) {
 
     return expeditionService.update(id, expedition, token).then(
       item => {
-        dispatch(updateSuccess(item.expedition));
+        dispatch(updateSuccess(item.expedition, item.countRecords));
       },
       error => {
-       dispatch(errorHandler(error));
+        dispatch(errorHandler(error));
       }
     );
   };
@@ -66,42 +66,57 @@ function request() {
   return { type: allExpeditionConstants.ALL_EXPEDITIONS_REQUEST };
 }
 function allSuccess(items, countRecords) {
-  return { type: allExpeditionConstants.ALL_EXPEDITIONS_SUCCESS, items, countRecords };
+  return {
+    type: allExpeditionConstants.ALL_EXPEDITIONS_SUCCESS,
+    items,
+    countRecords
+  };
 }
 function failure(error) {
   return { type: allExpeditionConstants.ALL_EXPEDITIONS_FAILURE, error };
 }
-function deleteSuccess(item) {
-  return { type: allExpeditionConstants.DELETE_EXPEDITIONS_SUCCESS, item };
+function deleteSuccess(item, countRecords) {
+  return {
+    type: allExpeditionConstants.DELETE_EXPEDITIONS_SUCCESS,
+    item,
+    countRecords
+  };
 }
-function createSuccess(item) {
+function createSuccess(item, countRecords) {
   return {
     type: allExpeditionConstants.CREATE_EXPEDITIONS_SUCCESS,
-    item
+    item,
+    countRecords
   };
 }
-function updateSuccess(item) {
+function updateSuccess(item, countRecords) {
   return {
     type: allExpeditionConstants.UPDATE_EXPEDITIONS_SUCCESS,
-    item
+    item,
+    countRecords
   };
+}
+function logOut() {
+  return { type: userConstants.LOGOUT };
 }
 export function errorHandler(error) {
   return dispatch => {
     if (error.status === 401) {
-      return (dispatch(failure(error)), dispatch({ type: userConstants.LOGOUT }));
+      return dispatch(failure(error)), dispatch(logOut());
     }
     return dispatch(failure(error));
   };
-};
+}
 function shouldFetchPosts(state) {
   const { isFetching } = state.expeditions;
-const result = isFetching ? false : true ;
-return result;
+  const result = isFetching ? false : true;
+  return result;
 }
 
-export function fetchPostsIfNeeded(start) {
+export function fetchPostsIfNeeded(start, name) {
   return (dispatch, getState) => {
-       shouldFetchPosts(getState()) ? dispatch(getAllExpeditions(start)) : Promise.resolve();
+    return shouldFetchPosts(getState())
+      ? dispatch(getAllExpeditions(start, name))
+      : Promise.resolve();
   };
 }

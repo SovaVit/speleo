@@ -8,13 +8,14 @@ export const expeditionService = {
   update,
   deleteExpedition
 };
-//get all by &caveId=${id}
-async function getAll(start, id) {
+//get all by &caveName=${id}
+async function getAll(start, name) {
+  const _name = name? name: null;
   const requestOptions = {
     method: "GET"
   };
   const response = await fetch(
-    `/speleo/expedition/?skip=${start}`,
+    `/speleo/expedition/?skip=${start}&caveName=${_name}`,
     requestOptions
   );
   const items = await handleResponse(response);

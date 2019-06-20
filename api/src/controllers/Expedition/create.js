@@ -11,10 +11,10 @@ const create = ({ Expedition }, { config }) => async (req, res, next) => {
     _.extend(expedition, req.body);
 
     await expedition.save();
-
+    const countRecords = await Expedition.find({}).countDocuments();
     return res
       .status(200)
-      .json({ expedition })
+      .json({ expedition, countRecords })
       .end();
   } catch (error) {
     next(error);

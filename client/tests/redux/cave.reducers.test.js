@@ -9,7 +9,8 @@ describe("AllCavesReducer", () => {
     expect(allCave(undefined, {})).toEqual({
       error: null,
       isFetching: false,
-      items: []
+      items: [],
+      countRecords: null
     });
   });
   it("request", () => {
@@ -19,18 +20,21 @@ describe("AllCavesReducer", () => {
     expect(allCave(initialState, action)).toEqual({
       error: null,
       isFetching: true,
-      items: []
+      items: [],
+      countRecords: null
     });
   });
   it("success", () => {
     const action = {
       type: allCaveConstants.ALL_CAVE_SUCCESS,
-      items: [1, 2, 3]
+      items: [1, 2, 3],
+      countRecords: 3
     };
     expect(allCave(initialState, action)).toEqual({
       error: null,
       isFetching: false,
-      items: action.items
+      items: action.items,
+      countRecords: 3
     });
   });
   it("failure", () => {
@@ -42,6 +46,7 @@ describe("AllCavesReducer", () => {
       ...initialState,
       isFetching: false,
       items: [],
+      countRecords: null,
       status: action.error.status,
       error: action.error.statusText
     });
@@ -49,39 +54,45 @@ describe("AllCavesReducer", () => {
   it("delete", () => {
     const action = {
       type: allCaveConstants.DELETE_CAVE_SUCCESS,
-      item: { _id: 1 }
+      item: { _id: 1 },
+      countRecords: 2
     };
     const oldState = { items: [{ _id: 1 }, { _id: 2 }, { _id: 3 }] };
 
     expect(allCave(oldState, action)).toEqual({
       isFetching: false,
       items: [{ _id: 2 }, { _id: 3 }],
-      error: null
+      error: null,
+      countRecords: 2
     });
   });
   it("create", () => {
     const action = {
       type: allCaveConstants.CREATE_CAVE_SUCCESS,
-      item: { _id: 1 }
+      item: { _id: 1 },
+      countRecords: 3
     };
     const oldState = { items: [{ _id: 2 }, { _id: 3 }] };
 
     expect(allCave(oldState, action)).toEqual({
       isFetching: false,
       items: [{ _id: 2 }, { _id: 3 }, action.item],
-      error: null
+      error: null,
+      countRecords: 3
     });
   });
   it("update", () => {
     const action = {
       type: allCaveConstants.UPDATE_CAVE_SUCCESS,
-      item: { _id: 1, t: "t" }
+      item: { _id: 1, t: "t" },
+      countRecords: 3
     };
     const oldState = { items: [{ _id: 1, t: "v" }, { _id: 2 }, { _id: 3 }] };
     expect(allCave(oldState, action)).toEqual({
       isFetching: false,
       items: [{ _id: 2 }, { _id: 3 }, action.item],
-      error: null
+      error: null,
+      countRecords: 3
     });
   });
 });

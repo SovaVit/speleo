@@ -57,11 +57,12 @@ describe("caves actions", () => {
     });
     it("delete cave", () => {
       const _id = 1;
-      fetch.mockResponse(JSON.stringify({ cave: { _id: 1 } }));
+      fetch.mockResponse(JSON.stringify({ cave: { _id: 1 }, countRecords: 3 }));
       const expectedActions = [
         {
           type: allCaveConstants.DELETE_CAVE_SUCCESS,
-          item: { _id: 1 }
+          item: { _id: 1 },
+          countRecords: 3
         }
       ];
       const store = mockStore({ user: { token: "12345" } });
@@ -71,11 +72,12 @@ describe("caves actions", () => {
     });
     it("create cave", () => {
       const cave = { _id: 1 };
-      fetch.mockResponse(JSON.stringify({ cave: { _id: 1 } }));
+      fetch.mockResponse(JSON.stringify({ cave: { _id: 1 }, countRecords: 3 }));
       const expectedActions = [
         {
           type: allCaveConstants.CREATE_CAVE_SUCCESS,
-          item: { _id: 1 }
+          item: { _id: 1 },
+        countRecords: 3
         }
       ];
       const store = mockStore({ user: { token: "12345" } });
@@ -85,11 +87,12 @@ describe("caves actions", () => {
     });
     it("update cave", () => {
       const cave = { _id: 1 };
-      fetch.mockResponse(JSON.stringify({ cave: { _id: 1 } }));
+      fetch.mockResponse(JSON.stringify({ cave: { _id: 1 }, countRecords: 3 }));
       const expectedActions = [
         {
           type: allCaveConstants.UPDATE_CAVE_SUCCESS,
-          item: { _id: 1 }
+          item: { _id: 1 }, 
+          countRecords: 3
         }
       ];
       const store = mockStore({ user: { token: "12345" } });
@@ -138,24 +141,18 @@ describe("caves actions", () => {
         }
       ];
       const store = mockStore({caves:{items:[1,2,3]}});
-      store.dispatch(fetchPostsIfNeeded());
-      expect(store.getActions()).toEqual(expectedActions);
+     return store.dispatch(fetchPostsIfNeeded()).then(()=>
+      expect(store.getActions()).toEqual(expectedActions));
       
     });
     it("fetchIsNeeded 2", () => {
       fetch.mockResponse(JSON.stringify({cave: [1,2,3]}));
       const expectedActions = [
-        {
-          type: allCaveConstants.ALL_CAVE_REQUEST
-        },
-        {
-          type: allCaveConstants.ALL_CAVE_SUCCESS,
-          items: [1,2,3]
-        }
+
       ];
-      const store = mockStore({caves:{items:[1,2,3], isFetching:false}});
-      store.dispatch(fetchPostsIfNeeded())
-        expect(store.getActions()).toEqual(expectedActions);
+      const store = mockStore({caves:{items:[1,2,3], isFetching: true}});
+     return store.dispatch(fetchPostsIfNeeded()).then(()=>
+        expect(store.getActions()).toEqual(expectedActions));
       
     });
   });

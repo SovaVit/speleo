@@ -27,26 +27,29 @@ export function allCave(state = initialState, action) {
       const newState = state.items.filter(item => {
         return item._id !== action.item._id;
       });
-      const CountRecordsMinus = state.countRecords - 1;
+
       return {
-        ...state,
+        isFetching: false,
         items: newState,
-        countRecords: CountRecordsMinus
+        countRecords: action.countRecords,
+        error: null
       };
     case allCaveConstants.CREATE_CAVE_SUCCESS:
-      const CountRecordsPlus = state.countRecords + 1;
       return {
-        ...state,
+        isFetching: false,
         items: [...state.items, action.item],
-        countRecords: CountRecordsPlus
+        countRecords: action.countRecords,
+        error: null
       };
     case allCaveConstants.UPDATE_CAVE_SUCCESS:
       const State = state.items.filter(item => {
         return item._id !== action.item._id;
       });
       return {
-        ...state,
-        items: [...State, action.item]
+        isFetching: false,
+        items: [...State, action.item],
+        countRecords: action.countRecords,
+        error: null
       };
 
     case allCaveConstants.ALL_CAVE_FAILURE:

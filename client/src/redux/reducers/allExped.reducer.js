@@ -26,18 +26,17 @@ export function allExpedition(state = initialState, action) {
       const newState = state.items.filter(item => {
         return item._id !== action.item._id;
       });
-      const CountRecordsMinus = state.countRecords - 1;
+
       return {
         ...state,
         items: newState,
-        countRecords: CountRecordsMinus
+        countRecords: action.countRecords
       };
     case allExpeditionConstants.CREATE_EXPEDITIONS_SUCCESS:
-      const CountRecordsPlus = state.countRecords + 1;
       return {
         ...state,
         items: [...state.items, action.item],
-        countRecords: CountRecordsPlus
+        countRecords: action.countRecords
       };
     case allExpeditionConstants.UPDATE_EXPEDITIONS_SUCCESS:
       const State = state.items.filter(item => {
@@ -45,7 +44,8 @@ export function allExpedition(state = initialState, action) {
       });
       return {
         ...state,
-        items: [...State, action.item]
+        items: [...State, action.item],
+        countRecords: action.countRecords
       };
     case allExpeditionConstants.ALL_EXPEDITIONS_FAILURE:
       return {

@@ -33,6 +33,6 @@ export function FetchIfNeeded(id) {
   return (dispatch, getState) => {
     const post = getState().expeditions.items.find(item => item._id === id);
 
-    post ? dispatch(success(post)) : dispatch(getOneExpedition(id));
+    return post ? dispatch(success(post)) : dispatch(getOneExpedition(id));
   };
 }

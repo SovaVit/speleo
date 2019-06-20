@@ -33,6 +33,6 @@ export function FetchIfNeeded(id) {
   return (dispatch, getState) => {
     const post = getState().caves.items.find(item => item._id === id);
 
-    post ? dispatch(success(post)) : dispatch(getOneCave(id));
+    return post ? dispatch(success(post)) : dispatch(getOneCave(id));
   };
 }

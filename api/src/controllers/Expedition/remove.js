@@ -3,10 +3,10 @@ const remove = ({ Expedition }, { config }) => async (req, res, next) => {
   try {
     const expedition = await Expedition.findOne({ _id });
     await Expedition.deleteOne({ _id });
-
+    const countRecords = await Expedition.find({}).countDocuments();
     res
       .status(200)
-      .json({ expedition })
+      .json({ expedition, countRecords })
       .end();
   } catch (error) {
     next(error);

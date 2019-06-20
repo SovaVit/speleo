@@ -11,10 +11,10 @@ const create = ({ Cave }, { config }) => async (req, res, next) => {
     _.extend(cave, req.body);
 
     await cave.save();
-
+    const countRecords = await Cave.find({}).countDocuments();
     return res
       .status(200)
-      .json({ cave })
+      .json({ cave, countRecords })
       .end();
   } catch (error) {
     next(error);

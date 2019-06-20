@@ -29,7 +29,7 @@ export function deleteCave(id) {
     const token = getState().user.token;
     return caveService.deleteCave(id, token).then(
       item => {
-        dispatch(deleteSuccess(item.cave));
+        dispatch(deleteSuccess(item.cave, item.countRecords));
       },
       error => {
         dispatch(errorHandler(error));
@@ -42,7 +42,7 @@ export function setCave(cave) {
     const token = getState().user.token;
     return caveService.create(cave, token).then(
       item => {
-        dispatch(createSuccess(item.cave));
+        dispatch(createSuccess(item.cave, item.countRecords));
       },
       error => {
         dispatch(errorHandler(error));
@@ -56,7 +56,7 @@ export function updateCave(id, cave) {
 
     return caveService.update(id, cave, token).then(
       item => {
-        dispatch(updateSuccess(item.cave));
+        dispatch(updateSuccess(item.cave, item.countRecords));
       },
       error => {
         dispatch(errorHandler(error));
@@ -74,25 +74,30 @@ function failure(error) {
   return { type: allCaveConstants.ALL_CAVE_FAILURE, error };
 }
 
-function deleteSuccess(item) {
-  return { type: allCaveConstants.DELETE_CAVE_SUCCESS, item };
+function deleteSuccess(item, countRecords) {
+  return { type: allCaveConstants.DELETE_CAVE_SUCCESS, item, countRecords };
 }
-function createSuccess(item) {
+function createSuccess(item, countRecords) {
   return {
     type: allCaveConstants.CREATE_CAVE_SUCCESS,
-    item
+    item,
+    countRecords
   };
 }
-function updateSuccess(item) {
+function updateSuccess(item, countRecords) {
   return {
     type: allCaveConstants.UPDATE_CAVE_SUCCESS,
-    item
+    item,
+    countRecords
   };
+}
+function logOut() {
+  return { type: userConstants.LOGOUT };
 }
 export function errorHandler(error) {
   return dispatch => {
     if (error.status === 401) {
-      return( dispatch(failure(error)), dispatch({ type: userConstants.LOGOUT }));
+      return dispatch(failure(error)), dispatch(logOut());
     }
     return dispatch(failure(error));
   };
@@ -105,7 +110,7 @@ function shouldFetchPosts(state) {
 
 export function fetchPostsIfNeeded(start) {
   return (dispatch, getState) => {
-    shouldFetchPosts(getState())
+    return shouldFetchPosts(getState())
       ? dispatch(getAllCaves(start))
       : Promise.resolve();
   };

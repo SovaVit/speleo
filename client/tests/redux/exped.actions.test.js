@@ -3,7 +3,8 @@ import {
   deleteExpedition,
   setExpedition,
   updateExpedition,
-  errorHandler
+  errorHandler,
+  fetchPostsIfNeeded
 } from "../../src/redux/actions/allExped.actions";
 import { allExpeditionConstants } from "../../src/redux/actions/allExped.actions";
 import { userConstants } from "../../src/Redux/actions/user.actions";
@@ -126,6 +127,32 @@ describe("expeditions actions", () => {
       const store = mockStore({});
       store.dispatch(errorHandler(e));
       expect(store.getActions()).toEqual(expectedActions);
+    });
+    it("fetchIsNeeded", () => {
+      fetch.mockResponse(JSON.stringify({ expedition: [1, 2, 3] }));
+      const expectedActions = [
+        {
+          type: allExpeditionConstants.ALL_EXPEDITIONS_REQUEST
+        },
+        {
+          type: allExpeditionConstants.ALL_EXPEDITIONS_SUCCESS,
+          items: [1, 2, 3]
+        }
+      ];
+      const store = mockStore({ expeditions: { items: [1, 2, 3] } });
+      return store
+        .dispatch(fetchPostsIfNeeded())
+        .then(() => expect(store.getActions()).toEqual(expectedActions));
+    });
+    it("fetchIsNeeded 2", () => {
+      fetch.mockResponse(JSON.stringify({ expedition: [1, 2, 3] }));
+      const expectedActions = [];
+      const store = mockStore({
+        expeditions: { items: [1, 2, 3], isFetching: true }
+      });
+      return store
+        .dispatch(fetchPostsIfNeeded())
+        .then(() => expect(store.getActions()).toEqual(expectedActions));
     });
   });
 });

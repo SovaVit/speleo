@@ -1,13 +1,15 @@
 const _ = require("lodash");
 
 const list = ({ Expedition }, { config }) => async (req, res, next) => {
-  let { caveId, skip } = req.query;
+  let { caveName, skip } = req.query;
+
   skip = skip ? parseInt(skip, 10) : 0;
   try {
     const query = {};
-    if (caveId) {
-      _.extend(query, { caveId: `${caveId}` });
+    if (caveName === null) {
+      _.extend(query, { caveName: `${caveName}` });
     }
+    
     const countRecords = await Expedition.find({}).countDocuments();
     const expedition = await Expedition.find(query)
       .skip(skip)

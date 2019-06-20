@@ -9,7 +9,8 @@ describe("AllExpeditionReducer", () => {
     expect(allExpedition(undefined, {})).toEqual({
       error: null,
       isFetching: false,
-      items: []
+      items: [],
+      countRecords: null
     });
   });
   it("request", () => {
@@ -24,12 +25,14 @@ describe("AllExpeditionReducer", () => {
   it("success", () => {
     const action = {
       type: allExpeditionConstants.ALL_EXPEDITIONS_SUCCESS,
-      items: [1, 2, 3]
+      items: [1, 2, 3],
+      countRecords: 3
     };
     expect(allExpedition(initialState, action)).toEqual({
       ...initialState,
       isFetching: false,
-      items: action.items
+      items: action.items,
+      countRecords: 3
     });
   });
   it("failure", () => {
@@ -40,6 +43,7 @@ describe("AllExpeditionReducer", () => {
     expect(allExpedition(initialState, action)).toEqual({
       ...initialState,
       isFetching: false,
+      countRecords: null,
       items: [],
       status: action.error.status,
       error: action.error.statusText
@@ -48,39 +52,39 @@ describe("AllExpeditionReducer", () => {
   it("delete", () => {
     const action = {
       type: allExpeditionConstants.DELETE_EXPEDITIONS_SUCCESS,
-      item: { _id: 1 }
+      item: { _id: 1 },
+      countRecords: 3
     };
     const oldState = { items: [{ _id: 1 }, { _id: 2 }, { _id: 3 }] };
 
     expect(allExpedition(oldState, action)).toEqual({
-      isFetching: false,
       items: [{ _id: 2 }, { _id: 3 }],
-      error: null
+      countRecords: 3
     });
   });
   it("create", () => {
     const action = {
       type: allExpeditionConstants.CREATE_EXPEDITIONS_SUCCESS,
-      item: { _id: 1 }
+      item: { _id: 1 },
+      countRecords: 3
     };
     const oldState = { items: [{ _id: 2 }, { _id: 3 }] };
 
     expect(allExpedition(oldState, action)).toEqual({
-      isFetching: false,
       items: [{ _id: 2 }, { _id: 3 }, action.item],
-      error: null
+      countRecords: 3
     });
   });
   it("update", () => {
     const action = {
       type: allExpeditionConstants.UPDATE_EXPEDITIONS_SUCCESS,
-      item: { _id: 1, t: "t" }
+      item: { _id: 1, t: "t" },
+      countRecords: 3
     };
     const oldState = { items: [{ _id: 1, t: "v" }, { _id: 2 }, { _id: 3 }] };
     expect(allExpedition(oldState, action)).toEqual({
-      isFetching: false,
       items: [{ _id: 2 }, { _id: 3 }, action.item],
-      error: null
+      countRecords: 3
     });
   });
 });

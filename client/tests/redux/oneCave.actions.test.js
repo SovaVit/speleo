@@ -53,9 +53,9 @@ describe("getOne", () => {
       }
     ];
     const store = mockStore({caves:{items:[{2:2},{3:3}]}});
-    return store.dispatch(FetchIfNeeded(_id)).then(() => {
+   return store.dispatch(FetchIfNeeded(_id)).then(()=>{
       expect(store.getActions()).toEqual(expectedActions);
-    });
+    })
   });
   it(" ERROR_ONE cave", () => {
     const e = new Error("Unauthorized");
