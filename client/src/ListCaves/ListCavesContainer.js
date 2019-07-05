@@ -5,7 +5,6 @@ import Pagination from "rc-pagination";
 import localeInfo from "rc-pagination/lib/locale/en_US";
 import "rc-pagination/assets/index.css";
 import { fetchPostsIfNeeded } from "../Redux/actions/allCave.actions";
-import NavBar from "../NavBar/Nav";
 import CavesList from "./CavesList";
 
 const ListCavesContainer = (props) => {
@@ -25,7 +24,6 @@ const ListCavesContainer = (props) => {
   };
   return (
     <>
-      <NavBar />
       <CavesList caves={caves} />
       <div>
         <Pagination

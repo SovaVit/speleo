@@ -34,9 +34,6 @@ class NavMenu extends React.Component {
   render() {
     return (
       <Navbar color="light" light expand="md">
-        <NavLink to="/" tag={RRNavLink}>
-          Home
-        </NavLink>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
@@ -46,7 +43,7 @@ class NavMenu extends React.Component {
                 tag={RRNavLink}
                 activeClassName="active"
               >
-                Печери
+                Edit caves
               </NavLink>
             </NavItem>
             <NavItem>
@@ -55,7 +52,7 @@ class NavMenu extends React.Component {
                 tag={RRNavLink}
                 activeClassName="active"
               >
-                Експедиції
+                Edit expeditions
               </NavLink>
             </NavItem>
 

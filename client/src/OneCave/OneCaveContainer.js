@@ -3,27 +3,29 @@ import { connect } from "react-redux";
 import { FetchIfNeeded } from "../Redux/actions/oneCave.actions";
 import { getPhotos } from "../Redux/actions/photo.actions";
 import OneCave from "./OneCave";
-import NavBar from "../NavBar/Nav";
 import { Alert } from "reactstrap";
-//import NotFound from '../../NotFound/NotFound'
+import MyCarousel from "../Carousel/Carousel";
+import ExpeditionList from "./ExpeditionList";
 
 const OneCaveContainer = props => {
   const { id } = props.match.params;
   const { error, isFetching, item } = props.cave;
   const { photo } = props;
-  // add Expeditions list, getExpeditions by CaveName
-  //add PhotoSlider
+
   useEffect(() => {
-    props.getOneCave(id);
-  }, []);
+    const getData = async () => {
+      await props.getOneCave(id);
+    };
+    getData();
+  }, [id]);
 
   return (
     <>
-      <NavBar />
+      <MyCarousel photo={photo} />
       {error !== null && <Alert color="danger">Помилка завантаження!</Alert>}
       {isFetching === true && <Alert>Завантаження!</Alert>}
-      {/* {item === null && <NotFound/>} */}
-      <OneCave item={item} photo={photo} />
+      <OneCave item={item} />
+      <ExpeditionList name={item.name} />
     </>
   );
 };

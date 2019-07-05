@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import NavBar from "../NavBar/Nav";
 import ExpeditionsList from "./ExpeditionsList";
 import { fetchPostsIfNeeded } from "../Redux/actions/allExped.actions";
 import Pagination from "rc-pagination";
@@ -26,7 +25,6 @@ const ListExpedContainer = props => {
 
   return (
     <>
-      <NavBar />
       <ExpeditionsList expeditions={expeditions} />
       <>
         <Pagination

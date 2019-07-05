@@ -97,7 +97,7 @@ function logOut() {
 export function errorHandler(error) {
   return dispatch => {
     if (error.status === 401) {
-      return dispatch(failure(error)), dispatch(logOut());
+      return( dispatch(failure(error)), dispatch(logOut()));
     }
     return dispatch(failure(error));
   };

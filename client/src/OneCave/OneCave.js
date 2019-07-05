@@ -1,8 +1,8 @@
 import React from "react";
 
 const OneCave = props => {
-  const { item, photo } = props;
-  console.log(photo);
+  const { item } = props;
+
   return (
     <>
       <div>{item.cadastralNumber}</div>

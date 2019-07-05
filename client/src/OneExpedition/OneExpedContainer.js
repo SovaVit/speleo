@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { FetchIfNeeded } from "../Redux/actions/oneExped.actions";
 import OneExpedition from "./OneExpedition";
-import NavBar from "../NavBar/Nav";
 import { Alert } from "reactstrap";
 
 const OneExpeditionContainer = props => {
@@ -10,11 +9,10 @@ const OneExpeditionContainer = props => {
   const { error, isFetching, item } = props.expedition;
   useEffect(() => {
     props.getOne(id);
-  }, []);
+  }, [id]);
 
   return (
     <>
-      <NavBar />
       {error !== null && <Alert color="danger">Помилка завантаження!</Alert>}
       {isFetching === true && <Alert>Завантаження!</Alert>}
       <OneExpedition item={item} />

@@ -12,7 +12,8 @@ export function allExpedition(state = initialState, action) {
     case allExpeditionConstants.ALL_EXPEDITIONS_REQUEST:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
+        error: null
       };
     case allExpeditionConstants.ALL_EXPEDITIONS_SUCCESS:
       return {

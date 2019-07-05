@@ -7,7 +7,8 @@ export function allPhoto(state = initialState, action) {
     case photoConstants.PHOTO_REQUEST:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
+        error: null
       };
     case photoConstants.PHOTO_SUCCESS:
       return {

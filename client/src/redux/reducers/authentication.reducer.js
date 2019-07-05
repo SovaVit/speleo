@@ -6,7 +6,8 @@ export function authentication(state = initialState, action) {
   switch (action.type) {
     case userConstants.LOGIN_REQUEST:
       return {
-        ...state
+        ...state,
+        error: null
       };
     case userConstants.LOGIN_SUCCESS:
       return {

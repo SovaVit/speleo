@@ -6,10 +6,10 @@ const list = ({ Expedition }, { config }) => async (req, res, next) => {
   skip = skip ? parseInt(skip, 10) : 0;
   try {
     const query = {};
-    if (caveName === null) {
+    if (caveName.length) {
       _.extend(query, { caveName: `${caveName}` });
     }
-    
+
     const countRecords = await Expedition.find({}).countDocuments();
     const expedition = await Expedition.find(query)
       .skip(skip)

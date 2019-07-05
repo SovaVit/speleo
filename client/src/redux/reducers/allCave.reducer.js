@@ -12,7 +12,8 @@ export function allCave(state = initialState, action) {
     case allCaveConstants.ALL_CAVE_REQUEST:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
+        error: null
       };
     case allCaveConstants.ALL_CAVE_SUCCESS:
       return {

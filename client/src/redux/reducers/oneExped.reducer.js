@@ -5,7 +5,7 @@ const initialState = { isFetching: false, item: {}, error: null };
 export function oneExpedition(state = initialState, action) {
   switch (action.type) {
     case oneExpeditionConstants.ONE_EXPEDITIONS_REQUEST:
-      return { ...state, isFetching: true };
+      return { ...state, isFetching: true, error: null };
     case oneExpeditionConstants.ONE_EXPEDITIONS_SUCCESS:
       return { ...state, isFetching: false, item: action.item };
     case oneExpeditionConstants.ONE_EXPEDITIONS_FAILURE:

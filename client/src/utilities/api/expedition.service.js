@@ -10,7 +10,7 @@ export const expeditionService = {
 };
 //get all by &caveName=${id}
 async function getAll(start, name) {
-  const _name = name? name: null;
+  const _name = name? name: "";
   const requestOptions = {
     method: "GET"
   };
