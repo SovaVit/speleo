@@ -6,17 +6,18 @@ import OneCave from "./OneCave";
 import { Alert } from "reactstrap";
 import MyCarousel from "../Carousel/Carousel";
 import ExpeditionList from "./ExpeditionList";
+import { fetchForOneCave } from "../Redux/actions/allExped.actions";
 
 const OneCaveContainer = props => {
   const { id } = props.match.params;
   const { error, isFetching, item } = props.cave;
-  const { photo } = props;
+  const { photo, expeditions } = props;
 
   useEffect(() => {
-    const getData = async () => {
+    const getData = async id => {
       await props.getOneCave(id);
     };
-    getData();
+    getData(id);
   }, [id]);
 
   return (
@@ -25,21 +26,23 @@ const OneCaveContainer = props => {
       {error !== null && <Alert color="danger">Помилка завантаження!</Alert>}
       {isFetching === true && <Alert>Завантаження!</Alert>}
       <OneCave item={item} />
-      <ExpeditionList name={item.name} />
+      <ExpeditionList items={expeditions} />
     </>
   );
 };
 const mapStateToProps = store => {
   return {
     cave: store.cave,
-    photo: store.photo
+    photo: store.photo,
+    expeditions: store.expeditions.items
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    getOneCave: _id => {
-      dispatch(FetchIfNeeded(_id));
-      dispatch(getPhotos(_id));
+    getOneCave: async _id => {
+      await dispatch(FetchIfNeeded(_id));
+      await dispatch(fetchForOneCave());
+      await dispatch(getPhotos(_id));
     }
   };
 };

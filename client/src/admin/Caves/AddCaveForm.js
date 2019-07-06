@@ -12,6 +12,7 @@ import {
   required,
   notEmpty,
   notNumber,
+  isDate,
   composeValidators
 } from "../../utilities/helpers/validate";
 
@@ -210,11 +211,14 @@ export default class AddCaveForm extends React.Component {
                       </FormGroup>
                     )}
                   </Field>
-                  <Field name="createdAt" validate={required}>
+                  <Field
+                    name="createdAt"
+                    validate={composeValidators(required, isDate)}
+                  >
                     {({ input, meta }) => (
                       <FormGroup>
                         <Label>Дата відкриття</Label>
-                        <Input {...input} type="text" placeholder="дд-мм-рр" />
+                        <Input {...input} type="text" placeholder="дд.мм.ррpp" />
                         {meta.error && meta.touched && (
                           <span className="text-danger">{meta.error}</span>
                         )}

@@ -17,7 +17,7 @@ const GetAllCaves = props => {
 
   useEffect(() => {
     props.get(0);
-  }, []);
+  }, [current]);
 
   const handleChange = async page => {
     await props.get(page * LIMIT - LIMIT);

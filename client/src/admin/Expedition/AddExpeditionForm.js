@@ -2,7 +2,12 @@ import React from "react";
 import { Form, Field } from "react-final-form";
 import { Button, FormGroup, Label, Input } from "reactstrap";
 import { Select, CavesOptions } from "../../SelectInput/SelectInput";
-import { required } from "../../utilities/helpers/validate";
+import {
+  required,
+  composeValidators,
+  notEmpty,
+  isDate
+} from "../../utilities/helpers/validate";
 
 export default class AddExpeditionForm extends React.Component {
   render() {
@@ -24,18 +29,24 @@ export default class AddExpeditionForm extends React.Component {
                   </FormGroup>
                 )}
               </Field>
-              <Field name="dateExpedition" validate={required}>
+              <Field
+                name="dateExpedition"
+                validate={composeValidators(isDate, required)}
+              >
                 {({ input, meta }) => (
                   <FormGroup>
                     <Label>Дата проведення</Label>
-                    <Input {...input} type="text" placeholder="дд-мм-рр" />
+                    <Input {...input} type="text" placeholder="дд.мм.ррpp" />
                     {meta.error && meta.touched && (
                       <span className="text-danger">{meta.error}</span>
                     )}
                   </FormGroup>
                 )}
               </Field>
-              <Field name="caveName" validate={required}>
+              <Field
+                name="caveName"
+                validate={composeValidators(notEmpty, required)}
+              >
                 {({ input, meta }) => (
                   <FormGroup>
                     <Label>Печера</Label>

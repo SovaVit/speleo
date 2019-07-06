@@ -120,3 +120,9 @@ export function fetchPostsIfNeeded(start, name) {
       : Promise.resolve();
   };
 }
+export function fetchForOneCave(){
+  return (dispatch, getState) => {
+    let name = getState().cave.item.name;
+    return dispatch(getAllExpeditions(0, name))
+  }
+}

@@ -1,34 +1,17 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchPostsIfNeeded } from "../Redux/actions/allExped.actions";
+import React from "react";
 
 const ExpeditionList = props => {
-  const { name } = props;
+  const { items } = props;
 
-  useEffect(() => {
-    const getData = () => {
-      if (name) {
-        props.getExpeditions(name);
-      }
-    };
-    getData();
-  }, [name]);
 
-  return <div />;
+  return (
+    <div>
+      {items &&
+        items.map((item, index) => {
+          return <div key={index}>{item.caveName}</div>;
+        })}
+    </div>
+  );
 };
-const mapStateToProps = store => {
-  return {
-    expeditions: store.expeditions
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    getExpeditions: name => {
-      dispatch(fetchPostsIfNeeded(0, name));
-    }
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ExpeditionList);
+
+export default ExpeditionList;
