@@ -21,7 +21,7 @@
     "mongoose": "^5.4.0",
     "morgan": "~1.9.0",
     "multer": "^1.4.1",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "rest-api-errors": "^1.2.1"
   },
   "devDependencies": {
